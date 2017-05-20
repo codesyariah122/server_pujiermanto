@@ -1,0 +1,23 @@
+# 
+
+# deb cdrom:[Debian GNU/Linux 8.7.1 _Jessie_ - Official i386 CD Binary-1 20170116-10:09]/ jessie main
+
+# deb cdrom:[Debian GNU/Linux 8.7.1 _Jessie_ - Official i386 CD Binary-1 20170116-10:09]/ jessie main
+
+#deb http://kartolo.sby.datautama.net.id/debian/ jessie main
+#deb-src http://kartolo.sby.datautama.net.id/debian/ jessie main
+
+#deb http://security.debian.org/ jessie/updates main
+#deb-src http://security.debian.org/ jessie/updates main
+
+# jessie-updates, previously known as 'volatile'
+#deb http://kartolo.sby.datautama.net.id/debian/ jessie-updates main
+#deb-src http://kartolo.sby.datautama.net.id/debian/ jessie-updates main
+deb http://httpredir.debian.org/debian jessie main
+deb-src http://httpredir.debian.org/debian jessie main
+
+deb http://httpredir.debian.org/debian jessie-updates main
+deb-src http://httpredir.debian.org/debian jessie-updates main
+
+deb http://security.debian.org/ jessie/updates main
+deb-src http://security.debian.org/ jessie/updates main
