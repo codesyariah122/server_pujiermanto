@@ -1,7 +1,7 @@
-//pujiermanto-2017
-//beum full masih editing
-
 <?php
+//puji ermanto - Bandung/2017
+//edited 
+//server debian ku
 function server($hostname, $ip, $os, $linux, $dns){
 	return "$hostname";
 	return "$ip";
@@ -25,7 +25,7 @@ $dns = server(shell_exec("named -v | xargs | awk '{print $1, $2 }'"));
 <body>
 <header>
 <h1>Welcome GNET@Network </h1>
-<section>Server By : <?=$l;?></section>
+<section>Server By : <?=$linux;?></section>
 </header>
 <main>
 <fieldset><legend><b>Table Informasi Local Server</b></legend>
@@ -40,7 +40,7 @@ $dns = server(shell_exec("named -v | xargs | awk '{print $1, $2 }'"));
 <tr>
 <td><font color="blue"><b><?=$hostname;?></font></b></td>
 <td><?=$ip;?></td>
-<td><?=$linux;?></td>
+<td><?=$os;?></td>
 <td><?=$dns;?></td>
 </tr>
 </table>
@@ -61,12 +61,12 @@ class serverku {
     var $disk1;
     var $disk2;
 
-     public function kapasitas_disk()  
-     {  
+     public function kapasitas_disk()
+     {
      $hasil_disk1= $this->disk1;
      $hasil_disk2= $this->disk2;
-     return $hasil_disk1.$hasil_disk2;  
-     }  
+     return $hasil_disk1.$hasil_disk2;
+     }
 }
 if(isset($_REQUEST['click_disk'])){
 
@@ -75,8 +75,11 @@ $server2 = new serverku;
 $server1->disk1=shell_exec("df -h | awk '/ 28G /'");
 $server2->disk2=shell_exec("df -h | awk '/Size/'");
 
-echo "<table border='1'>
-	<tr><th>".$server2->kapasitas_disk()."</th></tr>
-	<tr><td>".$server1->kapasitas_disk()."</td></tr></table>";
+echo "<fieldset><legend><b>Table Informasi Kapasitas HDD</b></legend>
+<div style='overflow-x:auto;'>
+<table border='1'>
+<tr><th>".$server2->kapasitas_disk()."</th></tr>
+<tr><td>".$server1->kapasitas_disk()."</td>
+</tr></table></fieldset></div>";
 }
 ?>
