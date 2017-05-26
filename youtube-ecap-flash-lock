@@ -1,0 +1,18 @@
+acl blokir url_regex -i ^http.*(youtube|ytimg)\.com\/.*\/player.*\/base\.js
+deny_info https://www.youtube.com/y…/jsbin/www-en_US-vfl4F02J4/base.js blokir
+http_access deny blokir
+acl uabrowser browser -i regexp (iPhone|iPad)
+acl uabrowser browser -i regexp (BlackBerry|PlayBook)
+acl uabrowser browser -i regexp (Windows.*Phone|Trident|IEMobile)
+acl uabrowser browser -i regexp Android
+acl uabrowser browser -i regexp Linux
+acl yt-rewrite url_regex -i ^https?\:\/\/(www|gaming)\.youtube\.com\/(watch\?v|embed|v)[=%&?\/]
+acl yt-rewrite url_regex -i ^https?\:\/\/www\.youtube\.com$
+acl yt-rewrite url_regex -i ^https?\:\/\/www\.youtube\.com\/$
+request_header_access Accept-Encoding deny yt-rewrite !uabrowser
+#yt_quality: tiny = 144px small = 240px medium = 360px large = 480px HD720 = Hd720px
+ecap_enable on
+loadable_modules /usr/local/lib/ecap_adapter_modifying.so
+ecap_service modif respmod_precache uri=ecap://dokter-squid.com/ecap yt_quality=tiny no-html5=no
+adaptation_access modif allow yt-rewrite !uabrowser
+adaptation_access modif deny all
