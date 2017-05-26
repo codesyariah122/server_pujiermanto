@@ -51,12 +51,18 @@ th,td{
                     "user3"=>"tehelis3",
                     "user4"=>"bumimin4",
                     "user5"=>"gingin5" );
-                    $password="takadezo99";
+
+       $password=array("password1"=>"2712101",
+                       "password2"=>"2712102",
+                       "password3"=>"2712103",
+                       "password4"=>"2712104",
+                       "password5"=>"2712105" );
     ?>
-    <?foreach($user as $_x){?>
-      <tr>
-        <td><?=$_x;?></td>
-    <td><?=$password;?></td>
+    <?$hotspot=array_combine($user , $password);
+    foreach($hotspot as $use=>$passw){?>
+<tr>
+      <td><?=$use;?></td>
+        <td><?=$passw;?></td>
   </tr><?}?>
 </table>
 </fieldset></center>
