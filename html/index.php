@@ -1,3 +1,6 @@
+//pujiermanto-2017
+//beum full masih editing
+
 <?php
 function server($hostname, $ip, $os, $linux, $dns){
 	return "$hostname";
