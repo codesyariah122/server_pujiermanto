@@ -18,7 +18,7 @@ fieldset{
 }
 table {
  border-collapse: collapse;
- widt:100%
+ width:100%;
 }
 th {
     background-color: #4CAF50;
