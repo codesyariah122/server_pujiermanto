@@ -13,7 +13,7 @@ main {
  margin-bottom:2em;
 }
 fieldset{
- width:25em;
+ width:32em;
 }
 table {
  border-collapse: collapse;
@@ -52,3 +52,57 @@ th,td{
 .menu:hover {    
 background-color: #0099cc;
 }
+
+
+textarea{
+   vertical-align: middle;
+   display:inline-block;
+   position:relative;
+  }
+  label{
+    font-weight: bold;
+    color:#00CCCC;
+  }
+  .name{
+    margin-left:2.2em;
+    margin-bottom:10px;
+  }
+  .email{
+  margin-left:5em;
+  margin-bottom:10px;
+  }
+  .birth{
+    margin-left:3.5em;
+    margin-bottom:10px;
+  }
+  .testi{
+    margin-left:2em;
+    margin-bottom:20px;
+  }
+  .btn {
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+    background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+    background-image: -o-linear-gradient(top, #3498db, #2980b9);
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    text-shadow: 7px 9px 5px #71b7ed;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 10px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    margin-left:30em;
+  }
+ 
+  .btn:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
