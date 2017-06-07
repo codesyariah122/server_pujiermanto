@@ -1,6 +1,7 @@
 <?php
+//A mother knows what her childâ€™s gone through, even if she didnâ€™t see it herself
 //puji ermanto - Bandung/2017
-//edited 
+//edited
 //server debian ku
 function server($hostname, $ip, $os, $linux, $dns){
 	return "$hostname";
@@ -13,7 +14,7 @@ $hostname = server($_SERVER['SERVER_NAME']);
 $ip = server($_SERVER['SERVER_ADDR']);
 $os = server(shell_exec("cat /etc/issue.net"));
 $linux = server(shell_exec("uname -a | awk '{print $1,$5}'"));
-$dns = server(shell_exec("named -v | xargs | awk '{print $1, $2 }'"));
+$dns = server(shell_exec('dnscrypt-proxy -V'));
 ?>
 <!DOCTYPE html>
 <head>
@@ -34,14 +35,14 @@ $dns = server(shell_exec("named -v | xargs | awk '{print $1, $2 }'"));
 <tr>
 <th>Domain Server</th>
 <th>IP Address</th>
-<th>Operating System</th>
-<th>DNS Version</th>
+<th style="width:50%;">Operating System</th>
+<th style="width:70%;">DNS Version</th>
 </tr>
 <tr>
 <td><font color="blue"><b><?=$hostname;?></font></b></td>
-<td><?=$ip;?></td>
-<td><?=$os;?></td>
-<td><?=$dns;?></td>
+<td><font color="orange"><b><?=$ip;?></b></font></td>
+<td><font color="green"><b><?=$os;?></font></b></td>
+<td><font color="blue"><b><?=$dns;?></font></b></td>
 </tr>
 </table>
 </div>
@@ -51,16 +52,15 @@ $dns = server(shell_exec("named -v | xargs | awk '{print $1, $2 }'"));
 <fieldset class="cek"><legend><b>Check Toko Sebelah</b></legend>
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
 <button type="submit" class="col-3 menu" name="click_disk">Lihat HDD</button>
-<button type="submit" class="col-3 menu" name="click_mem">Lihat Memory</button>
+<button type="submit" class="col-3 menu" name="squid_report">Repor Squid</button>
 </form>
 </fieldset>
 </div>
-
+<?php include_once('form.php');?>
 <?php
 class serverku {
     var $disk1;
     var $disk2;
-
      public function kapasitas_disk()
      {
      $hasil_disk1= $this->disk1;
@@ -69,17 +69,25 @@ class serverku {
      }
 }
 if(isset($_REQUEST['click_disk'])){
-
 $server1 = new serverku;
 $server2 = new serverku;
-$server1->disk1=shell_exec("df -h | awk '/ 28G /'");
+$server1->disk1=shell_exec("df -h | awk '/ 11G /'"); //edit 11G to your HDD capacity
 $server2->disk2=shell_exec("df -h | awk '/Size/'");
-
 echo "<fieldset><legend><b>Table Informasi Kapasitas HDD</b></legend>
 <div style='overflow-x:auto;'>
 <table border='1'>
 <tr><th>".$server2->kapasitas_disk()."</th></tr>
 <tr><td>".$server1->kapasitas_disk()."</td>
 </tr></table></fieldset></div>";
+}
+
+if(isset($_REQUEST['squid_report'])){
+$report = nl2br(shell_exec("cat /var/log/squid/access.log  | awk '{print $3, $6, $7}'"));
+$pecah_report = explode(" ", $report);
+echo $pecah[0]."<br/>";
+echo $pecah[1]."<br/>";
+echo $pecah[2]."<br/>";
+$gabung=implode(":", $pisah);
+echo $gabung;
 }
 ?>
