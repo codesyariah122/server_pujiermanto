@@ -1,8 +1,4 @@
 <?php
-echo "<br><br><br>";
-for($a=1;$a<=100;$a++){
-echo "=";
-}
 /*echo "<br/>";
 print_r($pecah_syslog);
 echo "<br/>";*/
