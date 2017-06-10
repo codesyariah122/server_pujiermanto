@@ -111,6 +111,7 @@ $ping = $_POST['ping'];
 
 <?php
 if(!empty($ping)){
+
 $koneksi = new serverku;
 $koneksi->ping=nl2br(shell_exec("ping -c 1 $ping"));
 $conn = $koneksi->ping;
@@ -131,6 +132,10 @@ header('location:index.php?id=0');
 switch($_REQUEST['click_check']):
 
 case 'disk':
+
+for($a=1;$a<=100;$a++){
+echo "=";
+}
 
 $server1 = new serverku;
 
@@ -195,6 +200,11 @@ break;
 
 // check system
 case 'sys':
+
+for($a=1;$a<=100;$a++){
+echo "=";
+}
+
 $system_log = new serverku;
 $system_log->sys=shell_exec("cat /var/www/html/sys.txt | awk '{print $1, $2, $3}'");
 $logsystem=$system_log->sys;
