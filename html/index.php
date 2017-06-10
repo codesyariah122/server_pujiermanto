@@ -26,7 +26,7 @@ $dns = server(shell_exec("named -v | xargs | awk '{print $1, $2 }'"));
 <body>
 <header>
 <h1>Welcome GNET@Network </h1>
-<section>Server By : <?=$linux;?> sysadmin : <?=$sysadmin;?><br/><?=$jam;?></section>
+<section>Server By : <?=$linux;?> <br/>sysadmin : <?=$sysadmin;?><br/><?=$jam;?></section>
 </header>
 <center>
 <main>
@@ -50,32 +50,71 @@ $dns = server(shell_exec("named -v | xargs | awk '{print $1, $2 }'"));
 </div>
 </legend>
 </main>
-<div class="row">
+<br/><br/>
 <fieldset class="cek"><legend><b>Check Toko Sebelah</b></legend>
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+<div class="row">
 <button type="submit" class="col-3 menu" name="click_check" value="disk">Lihat HDD</button>
 <button type="submit" class="col-3 menu" name="click_check" value="sys">System log</button>
-</form>
-
-</fieldset>
+<button type="submit" class="col-3 menu" name="click_check" value="squid">Squid log</button>
+<button type="submit" class="col-3 menu" name="click_check" value="dns">DNS Log</button>
+<button type="submit" class="col-3 menu" name="click_check" value="dns">Restart(need root)</button>
+<button type="submit" class="col-3 menu" name="click_check" value="dns">Squid Restart</button>
 </div>
+</form>
+<br/><br/>
+
+<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+<label for="ping">Cek Koneksi ke : </label>
+<input type="text" name="ping" placeholder="google.com"><br>
+<button style="margin-left:7em;" class="col-3 menu" type="submit" name="check_network">Check Ping</button><br/>
+</form>
+</fieldset>
 
 <?php
 class serverku {
+    var $ping;	
     var $disk1;
     var $disk2;
     var $sys;
 
      public function service_server()
      {
+     $connect = $this->ping;
      $hasil_disk1= $this->disk1;
      $hasil_disk2= $this->disk2;
      $syslog = $this->sys;
-     return $hasil_disk1. $hasil_disk2. $syslog;
+     
+return $connect. $hasil_disk1. $hasil_disk2. $syslog;
      }
 }
 
+?>
+<?php 
+
+//check Ping
+
+if(isset($_POST['check_network'])){
+
+$ping = $_POST['ping'];
+?>
+
+<fieldset><legend><b>Hasil Ping ke <?php echo $ping;?> </b></legend>
+
+<?php
+$koneksi = new serverku;
+$koneksi->ping=nl2br(shell_exec("ping -c 1 $ping"));
+$conn = $koneksi->ping;
+echo $conn;
+}?>
+
+</fieldset>
+
+
+
+<?php
 // check disk
+
 switch($_REQUEST['click_check']):
 
 case 'disk':
