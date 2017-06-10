@@ -4,7 +4,12 @@ for($a=1;$a<=100;$a++){
 echo "=";
 }
 
+//check list array nya dulu sebelum eksekusi
+/*echo "<br/>";
+print_r($pecah_syslog);
+echo "<br/>";*/
 
+// lets brayyy
 $z0=$pecah_syslog[0];
 
 $z1=$pecah_syslog[1];
