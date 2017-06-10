@@ -4,19 +4,27 @@ for($a=1;$a<=100;$a++){
 echo "=";
 }
 
-echo"<br>";
+
 $z0=$pecah_syslog[0];
-echo "<b>$z0</b>";
 
-echo"<br>";
 $z1=$pecah_syslog[1];
-echo "<b>$z1</b>";
 
-echo"<br>";
 $z2=$pecah_syslog[2];
-echo "<b>$z2</b>";
 
-echo"<br>";
 $z3=$pecah_syslog[3];
-echo "<b>$z3</b>";
+
+$z4=$pecah_syslog[4];
+
+$z5=$pecah_syslog[5];
+
+$z5=$pecah_syslog[6];
+
+$z7=$pecah_syslog[7];
+
+$z6=$pecah_syslog[8];
+
+$z9=$pecah_syslog[9];
+
+$z10=$pecah_syslog[10];
+
 ?>
