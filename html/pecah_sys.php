@@ -1,15 +1,13 @@
 <?php
-echo "<br>";
+echo "<br><br><br>";
 for($a=1;$a<=100;$a++){
 echo "=";
 }
-
-//check list array nya dulu sebelum eksekusi
 /*echo "<br/>";
 print_r($pecah_syslog);
 echo "<br/>";*/
 
-// lets brayyy
+
 $z0=$pecah_syslog[0];
 
 $z1=$pecah_syslog[1];
@@ -32,4 +30,19 @@ $z9=$pecah_syslog[9];
 
 $z10=$pecah_syslog[10];
 
+$z11=$pecah_syslog[11];
+
+$z12=$pecah_syslog[12];
+
+$z13=$pecah_syslog[13];
+
+$z14=$pecah_syslog[14];
+
+$z15=$pecah_syslog[15];
+
+$z16=$pecah_syslog[16];
+
+$z17=$pecah_syslog[17];
+
+$z18=$pecah_syslog[18];
 ?>
