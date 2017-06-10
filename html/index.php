@@ -1,11 +1,15 @@
 <?php
-function server($hostname, $ip, $os, $linux, $dns){
+function server($sysadmin, $jam, $hostname, $ip, $os, $linux, $dns){
+	return "$sysadmin";
+	return "$jam";
 	return "$hostname";
 	return "$ip";
 	return "$os";
 	return "$linux";
 	return "$dns";
 }
+$sysadmin = "Puji Ermanto";
+$jam = server(shell_exec("date"));
 $hostname = server($_SERVER['SERVER_NAME']);
 $ip = server($_SERVER['SERVER_ADDR']);
 $os = server(shell_exec("lsb_release -d | awk '{print $2,$3,$4,$5}'"));
@@ -22,7 +26,7 @@ $dns = server(shell_exec("named -v | xargs | awk '{print $1, $2 }'"));
 <body>
 <header>
 <h1>Welcome GNET@Network </h1>
-<section>Server By : <?=$linux;?></section>
+<section>Server By : <?=$linux;?> sysadmin : <?=$sysadmin;?><br/><?=$jam;?></section>
 </header>
 <center>
 <main>
@@ -144,9 +148,8 @@ $system_log->sys=shell_exec("cat /var/www/html/sys.txt | awk '{print $1, $2, $3}
 $logsystem=$system_log->sys;
 $pecah_syslog=explode(" ",$logsystem);
 
-print_r($pecah_syslog);
-
 include('pecah_sys.php');
+$syslog_debian=array($z0, $z1, $z18);
 
 echo "<fieldset><legend><b>Table Informasi systemlog</b></legend>";
 echo "<div style='overflow-x:auto;'>
@@ -156,7 +159,10 @@ echo "<th>Time</th>
 <th>Name</th>
 <th>Services</th>
 </tr>";
-echo "<td></td>";
+echo "<tr>";
+foreach($syslog_debian as $systech){
+echo "<td>$systech</td>";
+}
 echo "</tr>
 </table>
 </div>";
