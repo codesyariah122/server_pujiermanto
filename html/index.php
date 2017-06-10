@@ -49,14 +49,10 @@ $dns = server(shell_exec("named -v | xargs | awk '{print $1, $2 }'"));
 <div class="row">
 <fieldset class="cek"><legend><b>Check Toko Sebelah</b></legend>
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
-<button type="submit" class="col-3 menu" name="click_disk">Lihat HDD</button>
-<button type="submit" class="col-3 menu" name="click_mem">Lihat Memory</button>
-<button type="submit" class="col-3 menu" name="click_user">User Aktif</button>
-<button type="submit" class="col-3 menu" name="click_DNS">DNS log</button>
-<button type="submit" class="col-3 menu" name="click_sys">System log</button>
-<button type="submit" class="col-3 menu" name="click_DNS">Webmin</button>
-
+<button type="submit" class="col-3 menu" name="click_check" value="disk">Lihat HDD</button>
+<button type="submit" class="col-3 menu" name="click_check" value="sys">System log</button>
 </form>
+
 </fieldset>
 </div>
 
@@ -70,24 +66,23 @@ class serverku {
      {
      $hasil_disk1= $this->disk1;
      $hasil_disk2= $this->disk2;
-     $sys_log = $this->sys;
-     return $hasil_disk1. $hasil_disk2. $sys_log;
+     $syslog = $this->sys;
+     return $hasil_disk1. $hasil_disk2. $syslog;
      }
 }
+
 // check disk
-if(isset($_REQUEST['click_disk'])){
+switch($_REQUEST['click_check']):
+
+case 'disk':
 
 $server1 = new serverku;
 
 $server2 = new serverku;
 
-$system_log = new serverku;
-
 $server1->disk1=shell_exec("df -h | awk '/ 28G /'");
 
 $server2->disk2=shell_exec("df -h | awk '/ Size/'");
-
-$system_log->sys=nl2br(shell_exec("cat /var/www/html/sys.txt | awk '{print $3, $4, $5}'"));
 
 $disk1=$server1->disk1;
 
@@ -111,7 +106,9 @@ $y5 = $pecah_disk2[10];
 $y6 = $pecah_disk2[11];
 $y7 = $pecah_disk2[12];
 
+
 $check_disk = array($y1, $y2, $y3, $y4, $y5, $y6, $y7);
+
 echo "<fieldset><legend><b>Table Informasi Kapasitas HDD</b></legend>";
 
 echo "<div style='overflow-x:auto;'>
@@ -137,11 +134,35 @@ echo "</tr>
 </table>
 </div>
 </fieldset>";
-}
+
+break;
 
 // check system
-if(isset($_REQUEST['click_sys'])){
-echo $system_log->service_server();
-}
+case 'sys':
+$system_log = new serverku;
+$system_log->sys=shell_exec("cat /var/www/html/sys.txt | awk '{print $1, $2, $3}'");
+$logsystem=$system_log->sys;
+$pecah_syslog=explode(" ",$logsystem);
+
+print_r($pecah_syslog);
+
+include('pecah_sys.php');
+
+echo "<fieldset><legend><b>Table Informasi systemlog</b></legend>";
+echo "<div style='overflow-x:auto;'>
+<table border='1'>
+<tr>";
+echo "<th>Time</th>
+<th>Name</th>
+<th>Services</th>
+</tr>";
+echo "<td></td>";
+echo "</tr>
+</table>
+</div>";
+
+
+break;
+endswitch;
 ?>
 </center>
