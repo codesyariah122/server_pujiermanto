@@ -1,6 +1,6 @@
 acl "gnet"{
 	172.16.0.0/16;
-	#192.168.1.0/24;
+	192.168.1.0/24;
 	localhost;
 	localnets;
 };
@@ -14,13 +14,13 @@ options {
 	allow-recursion { gnet; };
 	allow-recursion-on { gnet; };
 	allow-query-cache { gnet; };
-	allow-query-cache-on { localhost; };
+	allow-query-cache-on {gnet;localhost; };
 	forwarders {
-		192.168.1.252;
-		192.168.1.1;
+		180.250.245.170;
+		180.250.245.174;
 		8.8.8.8;
 		8.8.4.4;
-	};
+		};
 	forward only;
 	
 	dnssec-enable yes;
