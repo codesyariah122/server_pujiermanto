@@ -24,6 +24,14 @@ $dns = server(shell_exec("named -v | xargs | awk '{print $1, $2 }'"));
 <link rel="stylesheet" href="asset_server/style.css" type="text/css">
 </head>
 <body>
+
+<?php
+if(isset($_GET['id'])){
+if($_GET['id']=="0"){
+?>
+<script language="javascript">alert('form cek koneksi harap di isi terlebih dahulu, ulangi bray!!');</script>
+<?php }}?>
+
 <header>
 <h1>Welcome GNET@Network </h1>
 <section>Server By : <?=$linux;?> <br/>sysadmin : <?=$sysadmin;?><br/><?=$jam;?></section>
@@ -62,7 +70,7 @@ $dns = server(shell_exec("named -v | xargs | awk '{print $1, $2 }'"));
 <button type="submit" class="col-3 menu" name="click_check" value="dns">Squid Restart</button>
 </div>
 </form>
-<br/><br/>
+<br/>
 
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
 <label for="ping">Cek Koneksi ke : </label>
@@ -102,11 +110,16 @@ $ping = $_POST['ping'];
 <fieldset><legend><b>Hasil Ping ke <?php echo $ping;?> </b></legend>
 
 <?php
+if(!empty($ping)){
 $koneksi = new serverku;
 $koneksi->ping=nl2br(shell_exec("ping -c 1 $ping"));
 $conn = $koneksi->ping;
 echo $conn;
-}?>
+    }else{
+header('location:index.php?id=0');
+  }	
+}
+?>
 
 </fieldset>
 
