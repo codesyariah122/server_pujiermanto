@@ -1,6 +1,6 @@
 acl "gnet"{
 	172.16.0.0/16;
-	192.168.1.0/24;
+	#192.168.1.0/24;
 	localhost;
 	localnets;
 };
@@ -16,16 +16,15 @@ options {
 	allow-query-cache { gnet; };
 	allow-query-cache-on {gnet;localhost; };
 	forwarders {
-		180.250.245.170;
-		180.250.245.174;
-		8.8.8.8;
-		8.8.4.4;
+		180.131.144.144;
+    		180.131.145.145;
+
 		};
 	forward only;
 	
 	dnssec-enable yes;
 	dnssec-validation yes;
 
-	auth-nxdomain yes;    # conform to RFC1035
+	auth-nxdomain no;    # conform to RFC1035
 	listen-on-v6 { any; };
 };
