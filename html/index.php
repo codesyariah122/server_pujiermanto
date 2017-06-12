@@ -116,7 +116,8 @@ $koneksi = new serverku;
 $koneksi->ping=nl2br(shell_exec("ping -c 1 $ping"));
 $conn = $koneksi->ping;
 echo $conn;
-    }else{
+
+}else{
 header('location:index.php?id=0');
   }	
 }
