@@ -80,6 +80,7 @@ if($_GET['id']=="0"){
 </fieldset>
 
 <?php
+	// ayo tambahkan lagi untuk service yang lainnya input ke server
 class serverku {
     var $ping;	
     var $disk1;
