@@ -6,9 +6,15 @@ acl "gnet"{
 };
 
 options {
+	listen-on port 53 { any; };
 	directory "/var/cache/bind";
-
+	
 	recursion yes;
+
+	check-names master ignore;
+	check-names slave ignore;
+	response-policy { zone "rpz.zone";};
+
 	allow-query { any; };
 	allow-query-on { gnet; };
 	allow-recursion { gnet; };
