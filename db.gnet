@@ -3,7 +3,7 @@
 ;
 $TTL	604800
 @	IN	SOA	gnet.net.id. root.gnet.net.id. (
-			      2		; Serial
+			      3		; Serial
 			 604800		; Refresh
 			  86400		; Retry
 			2419200		; Expire
@@ -11,5 +11,8 @@ $TTL	604800
 ;
 @	IN	NS	ns.gnet.net.id.
 @	IN	A	192.168.1.252
+@	IN	MX	252	mail.gnet.net.id.
 ns	IN	A	192.168.1.252
-www	IN	CNAME	192.168.1.252
+www	IN	A	192.168.1.252
+mail	IN	A	192.168.1.252
+portal	IN	A	192.168.1.252
