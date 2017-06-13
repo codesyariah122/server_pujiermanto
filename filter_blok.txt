@@ -1,0 +1,2 @@
+awk '{print $1" IN A 192.168.1.252"}' domains >> /etc/bind/db.rpz.zone
+awk '{print "*."$1" IN A 192.168.1.252"}' domains >> /etc/bind/db.rpz.zone
