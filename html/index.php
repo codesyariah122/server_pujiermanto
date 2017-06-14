@@ -32,6 +32,13 @@ if($_GET['id']=="0"){
 <script language="javascript">alert('form cek koneksi harap di isi terlebih dahulu, ulangi bray!!');</script>
 <?php }}?>
 
+<?php
+if(isset($_GET['id'])){
+if($_GET['id']=="dns0"){
+?>
+<script language="javascript">alert('form DNS cache belum diisi!!');</script>
+<?php }}?>
+
 <header>
 <h1>Welcome GNET@Network </h1>
 <section>Server By : <?=$linux;?> <br/>sysadmin : <?=$sysadmin;?><br/><?=$jam;?></section>
@@ -77,11 +84,18 @@ if($_GET['id']=="0"){
 <input type="text" name="ping" placeholder="google.com"><br>
 <button style="margin-left:7em;" class="col-3 menu" type="submit" name="check_network">Check Ping</button><br/>
 </form>
+<br/><br/>
+<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+<label for="dnscache">DNS cache: </label>
+<input type="text" name="dns" id="dnscache" placeholder="google.com"><br>
+<button style="margin-left:7em;" class="col-3 menu" type="submit" name="cache">View Cache</button><br/>
+</form>
+
 </fieldset>
 
 <?php
-	// ayo tambahkan lagi untuk service yang lainnya input ke server
 class serverku {
+    var $dnscache;
     var $ping;	
     var $disk1;
     var $disk2;
@@ -89,15 +103,32 @@ class serverku {
 
      public function service_server()
      {
+     $bind9 = $this->dnscache;
      $connect = $this->ping;
      $hasil_disk1= $this->disk1;
      $hasil_disk2= $this->disk2;
      $syslog = $this->sys;
      
-return $connect. $hasil_disk1. $hasil_disk2. $syslog;
+return $connect. $bind9. $hasil_disk1. $hasil_disk2. $syslog;
      }
 }
 
+?>
+<?php
+if(isset($_POST['cache'])){
+$dns=$_POST['dns'];
+?>
+<fieldset><legend><b>Hasil Cache <?php echo $dns;?> </b></legend>
+<?php
+if(!empty($dns)){
+$dnsbind9 = new serverku;
+$dnsbind9->dnscache=nl2br(shell_exec("grep $dns /var/cache/bind/named_dump.db"));
+$bind9cache = $dnsbind9->dnscache;
+echo $bind9cache;
+}else{
+header('location:index.php?id=dns0');
+}
+}
 ?>
 <?php 
 
