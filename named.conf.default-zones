@@ -26,16 +26,3 @@ zone "255.in-addr.arpa" {
 	type master;
 	file "/etc/bind/db.255";
 };
-
-#Forward Zone gnet
-#zone "gnet.net.id" {
-	#type master;
-	#file "/etc/bind/db.gnet";
-#};
-
-#Reverse Zone
-#zone "1.168.192.in-addr.arpa" {
-	#type master;
-	#notify no;
-	#file "/etc/bind/db.192";
-#};
