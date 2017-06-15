@@ -116,17 +116,73 @@ return $connect. $bind9. $hasil_disk1. $hasil_disk2. $syslog;
 ?>
 <?php
 if(isset($_POST['cache'])){
+include('db_dns/koneksi.php');
+
 $dns=$_POST['dns'];
+
 ?>
 <fieldset><legend><b>Hasil Cache <?php echo $dns;?> </b></legend>
 <?php
 if(!empty($dns)){
+
 $dnsbind9 = new serverku;
-$dnsbind9->dnscache=nl2br(shell_exec("grep $dns /var/cache/bind/named_dump.db"));
+
+$dnsbind9->dnscache=shell_exec("cat /var/cache/bind/named_dump.db | awk '/$dns/'");
+
 $bind9cache = $dnsbind9->dnscache;
+
 echo $bind9cache;
+
+$pecah_cache = explode(" ",$bind9cache);
+
+/*
+print_r($pecah_cache);
+
+echo "<br/>";
+
+for($a=1;$a < 100; $a++){
+echo "=";
+}
+echo "<br/>";
+*/
+
+$data1=$pecah_cache[0];
+$dat2=$pecah_cache[2];
+$data3=$pecah_cache[5];
+$data4=$pecah_cache[7];
+$data5=$pecah_cache[11];
+
+/*echo $pecah_cache[0];
+echo "<br/>";
+echo $pecah_cache[2];
+echo "<br/>";
+echo $pecah_cache[5];
+echo "<br/>";
+echo $pecah_cache[7];
+echo "<br/>";
+echo $pecah_cache[11];
+echo "<br/>";
+*/
+
+$kirim_data=mysql_query("insert into data_cache values('$data1')");
+if(!$kirim_data){
+die('gagal mengirim data ke database:'.mysql_error());
 }else{
+?>
+<script language="javascript">alert('data telah dikirim');</script>
+<?php
+}
+
+/*
+$data_cache = array($data1,$data2,$data3,$data4,$data5);
+foreach($data_cache as $cache_dns){
+}
+*/
+
+}else{
+
 header('location:index.php?id=dns0');
+
 }
 }
 ?>
