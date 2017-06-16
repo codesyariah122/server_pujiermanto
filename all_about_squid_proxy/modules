@@ -1,0 +1,14 @@
+ip_conntrack
+ip_tables
+ip_conntrack_ftp
+ip_conntrack_irc
+iptable_nat
+ip_nat_ftp
+xt_TPROXY
+xt_socket
+xt_mark
+nf_nat
+nf_conntrack_ipv4
+nf_conntrack
+nf_defrag_ipv4
+ipt_REDIRECT
