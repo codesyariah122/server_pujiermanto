@@ -1,0 +1,7 @@
+cat /var/log/squid/access.log | awk '{print $3}' >> /var/www/html/ip.txt
+
+cat /var/log/squid/access.log | awk '{print $4}' >> /var/www/html/tcp.txt
+
+cat /var/log/squid/access.log | awk '{print $6}' >> /var/www/html/stats.txt
+
+cat /var/log/squid/access.log | awk '{print $7}' >> /var/www/html/url.txt
