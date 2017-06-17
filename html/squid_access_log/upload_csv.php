@@ -14,14 +14,12 @@ mysql_select_db($database);
  
 if (isset($_POST['submit'])) {//Script akan berjalan jika di tekan tombol submit..
  
-//Script Upload File..
     if (is_uploaded_file($_FILES['filename']['tmp_name'])) {
         echo "<h1>" . "File ". $_FILES['filename']['name'] ." Berhasil di Upload" . "</h1>";
         echo "<h2>Menampilkan Hasil Upload:</h2>";
         readfile($_FILES['filename']['tmp_name']);
     }
  
-    //Import uploaded file to Database, Letakan dibawah sini..
     $handle = fopen($_FILES['filename']['tmp_name'], "r"); //Membuka file dan membacanya
 while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
     $query_squid ="INSERT INTO access_log VALUES 
@@ -33,13 +31,13 @@ while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
 		 '".addslashes($data[3])."'
                  )";
   
-mysql_query($query_squid) or die(mysql_error()); //Melakukan Import
+mysql_query($query_squid) or die(mysql_error()); 
     }
  
-    fclose($handle); //Menutup CSV file
+    fclose($handle); 
     echo "<br><strong>Import data selesai.</strong>";
     
-}else { //Jika belum menekan tombol submit, form dibawah akan muncul.. ?>
+}else {  ?>
  
 <!-- Form Untuk Upload File CSV-->
    Silahkan masukan file csv yang ingin diupload<br /> 
@@ -48,6 +46,6 @@ mysql_query($query_squid) or die(mysql_error()); //Melakukan Import
     <input type='file' name='filename' size='100'>
    <input type='submit' name='submit' value='Upload'></form>
  
-<?php } mysql_close(); //Menutup koneksi SQL?>
+<?php } mysql_close(); ?>
 </body>
 </html><br><br><br>
