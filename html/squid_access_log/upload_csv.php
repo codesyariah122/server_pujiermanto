@@ -12,7 +12,7 @@ $database='squid_report';
 mysql_connect($host,$username,$password);
 mysql_select_db($database);
  
-if (isset($_POST['submit'])) {//Script akan berjalan jika di tekan tombol submit..
+if (isset($_POST['submit'])) {
  
     if (is_uploaded_file($_FILES['filename']['tmp_name'])) {
         echo "<h1>" . "File ". $_FILES['filename']['name'] ." Berhasil di Upload" . "</h1>";
@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {//Script akan berjalan jika di tekan tombol submit
         readfile($_FILES['filename']['tmp_name']);
     }
  
-    $handle = fopen($_FILES['filename']['tmp_name'], "r"); //Membuka file dan membacanya
+    $handle = fopen($_FILES['filename']['tmp_name'], "r");
 while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
     $query_squid ="INSERT INTO access_log VALUES 
                 (
