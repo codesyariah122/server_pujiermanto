@@ -1,3 +1,7 @@
+complit txt = cat /var/log/squid/access.log | awk '{print $3","$4","$6","$7}' >> /var/www/html/squid_log.txt
+
+=================================================================================================================
+
 cat /var/log/squid/access.log | awk '{print $3}' >> /var/www/html/ip.txt
 
 cat /var/log/squid/access.log | awk '{print $4}' >> /var/www/html/tcp.txt
