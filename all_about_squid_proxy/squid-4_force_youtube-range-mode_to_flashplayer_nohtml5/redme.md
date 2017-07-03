@@ -57,3 +57,11 @@ squid -k reconfigure
 <img src="https://github.com/puji122/server/blob/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/Untitled.jpg?raw=true"/>
 
 <img src="https://github.com/puji122/server/blob/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/Untitled1.jpg?raw=true"/>
+
+# GNET_NETWORK 
+<p>Desa.Margahurip Kp.Tarigu Kec.Banjaran Kab. Bandung<br/>
+Website : <a href="http://gnet.vacau.com/">GNET NETWORK</a><br/>
+contact : <br/>
+<li>+62 8122 0562 220 / rangga - owner GNet</li>
+<li>+62 8953 4504 1053 / puji - proxy</li>
+</p>
