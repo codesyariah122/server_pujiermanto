@@ -42,7 +42,7 @@ if($_GET['id']=="dns0"){
 <td><font color="blue"><b><?php server("hostname");?></font></b></td>
 <td><?php server("ip");?></td>
 <td><?php server("os");?></td>
-<td></td>
+<td><?php server("dns");?></td>
 </tr>
 </table>
 </div>
@@ -52,7 +52,7 @@ if($_GET['id']=="dns0"){
 <fieldset class="cek"><legend><b>Check Toko Sebelah</b></legend>
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
 <div class="row">
-<button type="submit" class="col-3 menu" name="click_check" value="disk">Lihat HDD</button>
+<button type="submit" class="col-3 menu" name="click_check" value="disk">Lihat Cache</button>
 <button type="submit" class="col-3 menu" name="click_check" value="sys">System log</button>
 <button type="submit" class="col-3 menu" name="click_check" value="squid">Squid log</button>
 <button type="submit" class="col-3 menu" name="click_check" value="dns">DNS Log</button>
@@ -213,13 +213,16 @@ $server1 = new serverku;
 
 $server2 = new serverku;
 
-$server1->disk1=shell_exec("df -h | awk '/ 28G /'");
+$server1->disk1=shell_exec("df -h | awk '/sda7/'");
 
 $server2->disk2=shell_exec("df -h | awk '/ Size/'");
 
 $disk1=$server1->disk1;
 
 $disk2=$server2->disk2;
+
+// chek dulu array nya contoh :
+// print_r($pecah_disk1);
 
 $pecah_disk1 = explode(" ",$disk1);
 $x1 = $pecah_disk1[0];
@@ -228,6 +231,9 @@ $x3 = $pecah_disk1[10];
 $x4 = $pecah_disk1[13];
 $x5 = $pecah_disk1[16];
 $x6 = $pecah_disk1[17];
+
+// chek dulu array nya
+// print_r($pecah_disk1);
 
 $pecah_disk2 = explode(" ",$disk2);
 $y1 = $pecah_disk2[0];
@@ -240,9 +246,9 @@ $y6 = $pecah_disk2[11];
 $y7 = $pecah_disk2[12];
 
 
-$check_disk = array($y1, $y2, $y3, $y4, $y5, $y6, $y7);
+$check_disk = array($y1, $y2, $y3, $y4, $y5, $y6);
 
-echo "<fieldset><legend><b>Table Informasi Kapasitas HDD</b></legend>";
+echo "<fieldset><legend><b>Table Informasi Kapasitas HDD Cache squid</b></legend>";
 
 echo "<div style='overflow-x:auto;'>
 <table border='1'>
@@ -259,7 +265,9 @@ echo "<tr>";
 
 $disk_check = array($x1, $x2, $x3, $x4, $x5, $x6);
 
+
 foreach($disk_check as $disk_tools){
+
  echo "<td>$disk_tools</td>";
 }
 
