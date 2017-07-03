@@ -5,6 +5,7 @@ wget https://github.com/puji122/server/raw/master/all_about_squid_proxy/squid-4_
 tar zxvf libecap-1.0.1.tar.gz
 cd libecap-*
 ./configure && make && make install
+
 ```
 #install ecap_adapter_sample
 ```bash
