@@ -55,15 +55,15 @@ find_cache_type () {
         [ -n "$res" ] || res=$2
         echo "$res"
 }
- 
+
 start () {
 #        $RAMFS clean
 #        $RAMFS mount
 #        $RAMFS restore
- 
-        cache_dir=`find_cache_dir cache_dir /cache/cache`
+
+        cache_dir=`find_cache_dir cache_dir /cache/`
         cache_type=`find_cache_type cache_dir aufs`
- 
+
         #
     # Create spool dirs if they don't exist.
     #
