@@ -6,9 +6,8 @@ tar zxvf libecap-1.0.1.tar.gz
 cd libecap-*
 ./configure && make && make install
 
-```
 #install ecap_adapter_sample
-```bash
+
 wget https://github.com/puji122/server/raw/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/libecap-1.0.1.tar.gz
 tar zxvf ecap_DSI.tar.gz
 cd ecap_adapter_sample-1.0.0/
@@ -16,10 +15,10 @@ cd ecap_adapter_sample-1.0.0/
 cd
 echo '/usr/local/lib' >> /etc/ld.so.conf
 ldconfig
-```
+
 
 #install squid-4.0.4
-```bash
+
 wget http://www.squid-cache.org/Versions/v4/squid-4.0.4.tar.gz
 tar xzvf squid-4.0.4.tar.gz
 cd squid-4*
@@ -50,4 +49,5 @@ squid -k reconfigure
 reboot
 squid -k reconfigure
 /etc/init.d/squid restart
+
 ```
