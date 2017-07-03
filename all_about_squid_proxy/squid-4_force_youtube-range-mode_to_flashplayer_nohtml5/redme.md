@@ -9,7 +9,7 @@ cd libecap-*
 ```
 # install ecap_adapter_sample
 ```bash
-wget https://github.com/puji122/server/raw/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/libecap-1.0.1.tar.gz
+wget https://raw.githubusercontent.com/puji122/server/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/ecap_DSI.tar.gz
 tar zxvf ecap_DSI.tar.gz
 cd ecap_adapter_sample-1.0.0/
 ./configure && make && make install
