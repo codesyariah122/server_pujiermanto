@@ -52,3 +52,8 @@ reboot
 squid -k reconfigure
 /etc/init.d/squid restart
 ```
+
+# documentation 
+<img src="https://github.com/puji122/server/blob/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/Untitled.jpg?raw=true"/>
+
+<img src="https://github.com/puji122/server/blob/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/Untitled1.jpg?raw=true"/>
