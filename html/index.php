@@ -1,27 +1,10 @@
-<?php
-function server($sysadmin, $jam, $hostname, $ip, $os, $linux, $dns){
-	return "$sysadmin";
-	return "$jam";
-	return "$hostname";
-	return "$ip";
-	return "$os";
-	return "$linux";
-	return "$dns";
-}
-$sysadmin = "Puji Ermanto";
-$jam = server(shell_exec("date"));
-$hostname = server($_SERVER['SERVER_NAME']);
-$ip = server($_SERVER['SERVER_ADDR']);
-$os = server(shell_exec("lsb_release -d | awk '{print $2,$3,$4,$5}'"));
-$linux = server(shell_exec("uname -a | awk '{print $1,$5}'"));
-$dns = server(shell_exec("named -v | xargs | awk '{print $1, $2 }'"));
-?>
+<?php include('opsi.php');?>
 <!DOCTYPE html>
 <head>
 <meta chaset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Server GNet</title>
-<link rel="stylesheet" href="asset_server/style.css" type="text/css">
+<link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
 
@@ -41,7 +24,7 @@ if($_GET['id']=="dns0"){
 
 <header>
 <h1>Welcome GNET@Network </h1>
-<section>Server By : <?=$linux;?> <br/>sysadmin : <?=$sysadmin;?><br/><?=$jam;?></section>
+<section>Server By : <?php server("linux");?> <br/>sysadmin : <?php server("sysadmin");?><br/><?php server("jam");?></section>
 </header>
 <center>
 <main>
@@ -56,10 +39,10 @@ if($_GET['id']=="dns0"){
 <th>DNS Version</th>
 </tr>
 <tr>
-<td><font color="blue"><b><?=$hostname;?></font></b></td>
-<td><?=$ip;?></td>
-<td><?=$os;?></td>
-<td><?=$dns;?></td>
+<td><font color="blue"><b><?php server("hostname");?></font></b></td>
+<td><?php server("ip");?></td>
+<td><?php server("os");?></td>
+<td></td>
 </tr>
 </table>
 </div>
