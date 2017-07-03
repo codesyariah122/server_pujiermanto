@@ -29,6 +29,3 @@ $server = shell_exec("dnscrypt-proxy -V");
 echo $server;
 }
 } //function end
-
-server("dns");
-
