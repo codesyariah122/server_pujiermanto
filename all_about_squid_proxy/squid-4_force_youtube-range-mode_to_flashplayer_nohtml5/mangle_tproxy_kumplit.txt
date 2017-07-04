@@ -10,7 +10,7 @@ add action=mark-connection chain=prerouting dst-address=!172.16.0.0/16 in-interf
     protocol=tcp
 add action=mark-routing chain=prerouting connection-mark=http/https in-interface=!proxy new-routing-mark=via_squid passthrough=no protocol=tcp src-address=\
     !172.16.0.1 src-port=80,8080,443
-add action=mark-packet chain=prerouting comment=MARK_CACHE_HIT_FROM_PROXY_ZAIB dscp=4 new-packet-mark=proxy passthrough=no
+add action=mark-packet chain=prerouting comment=MARK_CACHE_HIT_FROM_PROXY dscp=4 new-packet-mark=proxy passthrough=no
 add action=mark-connection chain=prerouting comment="closser online megaxus" dst-port=21232,41232 new-connection-mark=zar-goc passthrough=yes protocol=tcp
 add action=mark-connection chain=prerouting dst-port=32740 new-connection-mark=zar-goc passthrough=yes protocol=udp
 add action=mark-connection chain=prerouting comment=mobilelegend dst-port=30091,30101,14000,39571 new-connection-mark=zar-goc passthrough=yes protocol=tcp
