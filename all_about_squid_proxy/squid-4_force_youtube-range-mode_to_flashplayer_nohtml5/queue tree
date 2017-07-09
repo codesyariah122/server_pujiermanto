@@ -1,0 +1,50 @@
+/queue tree
+add comment="game download" name="2.GAME DOWN" parent=global priority=2
+add comment="game upload" name="3.GAME UPLOAD" parent=speedy priority=2
+add name="1.GAME ONLINE DOWN" packet-mark=zar-gopd parent="2.GAME DOWN" priority=2 queue=DOWN
+add max-limit=5M name="2.GAME FACEBOOK DOWN" packet-mark=zar-gfpd parent="2.GAME DOWN" priority=3 queue=DOWN
+add name="1.GAME ONLINE UPLOAD" packet-mark=zar-gopd parent="3.GAME UPLOAD" priority=2 queue=UP
+add max-limit=3M name="2.GAME FACEBOOK UPLOAD" packet-mark=zar-gfpu parent="3.GAME UPLOAD" priority=3 queue=UP
+add comment="upload speedy" max-limit=3M name=UPLOAD-BROWSING packet-mark=upload parent=speedy priority=4 queue=UP
+add comment="download global 30 Mbps" max-limit=28M name="1.2 HTTP-DOWN" parent=global priority=2
+add max-limit=15M name="1.3 BROWSING DOWN" packet-mark=download parent="1.2 HTTP-DOWN" priority=4 queue=DOWN
+add max-limit=15M name="1.4 LIMIT EXTENTION" parent="1.2 HTTP-DOWN" priority=5
+add max-limit=4M name=YOUTUBE parent="1.4 LIMIT EXTENTION" priority=5
+add name="YOUTUBE STREAMING" packet-mark="YOUTUBE STREAMING" parent=YOUTUBE priority=5 queue=DOWN
+add name=MKV packet-mark=MKV parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=MP3 packet-mark=MP3 parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=MP4 packet-mark=MP4 parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=ZIP packet-mark=ZIP parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=EXE packet-mark=EXE parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=ISO packet-mark=ISO parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=AVI packet-mark=AVI parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=MOV packet-mark=MOV parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=MPEG packet-mark=MPEG parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=MPG packet-mark=MPG parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=RAR packet-mark=RAR parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=WAV packet-mark=WAV parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=WMV packet-mark=WMV parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=3GP packet-mark=3GP parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=7z packet-mark=7z parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name="YOUTUBE DOWNLOAD" packet-mark="YOUTUBE DOWNLOAD" parent=YOUTUBE priority=5 queue=DOWN
+add max-limit=5M name=PORN parent="1.4 LIMIT EXTENTION" priority=5
+add name=PORN1 packet-mark=PORN1 parent=PORN priority=5 queue=DOWN
+add name=PORN2 packet-mark=PORN2 parent=PORN priority=5 queue=DOWN
+add name=PORN3 packet-mark=PORN3 parent=PORN priority=5 queue=DOWN
+add name="MIVO TV" packet-mark="MIVO TV" parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=PORN4 packet-mark=PORN4 parent=PORN priority=5 queue=DOWN
+add name="proxy hit" packet-mark=proxy parent=global queue=default
+add max-limit=2M name=IDM-Limit packet-mark=IDM-Conn parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name="video streamin" packet-mark="video streaming" parent=YOUTUBE queue=default
+add comment="ciberyndo download" max-limit=15M name="client down" parent="1.4 LIMIT EXTENTION"
+add name="cyberindo down" packet-mark=CYBERINDO_DOWN parent="client down" queue=pcq-down
+add name=youtube packet-mark=youtube parent=YOUTUBE queue=default
+add name=youtube2 packet-mark=youtube2 parent=YOUTUBE queue=default
+add name=VIDEO packet-mark=VIDEO parent="1.4 LIMIT EXTENTION" priority=5
+add name=TUBE packet-mark=TUBE parent="1.4 LIMIT EXTENTION" priority=5
+add comment="cyberindo upload" max-limit=3M name="upload cyberindo" parent=speedy queue=default
+add comment="download steam update" max-limit=15M name="download steam" parent="1.4 LIMIT EXTENTION"
+add name="steam download" packet-mark="steam download" parent="download steam" queue=pcq-down
+add name=proxy packet-mark=proxy parent="proxy hit"
+add name="c. level up" parent="upload cyberindo" queue=default
+add name="cyberindo up" packet-mark=CYBERINDO_UP parent="c. level up" queue=pcq-up
