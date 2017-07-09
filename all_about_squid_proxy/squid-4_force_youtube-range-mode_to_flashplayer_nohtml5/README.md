@@ -6,6 +6,8 @@ wget https://github.com/puji122/server/raw/master/all_about_squid_proxy/squid-4_
 tar xvf libecap-1.0.1.tar.gz
 cd libecap-*
 ./configure && make && make install
+echo '/usr/local/lib' >> /etc/ld.so.conf
+ldconfig
 cd ..
 ```
 # install ecap_adapter_sample
@@ -19,8 +21,6 @@ curl -o adapter_modifying.cc https://raw.githubusercontent.com/puji122/server/ma
 cd -
 ./configure && make && make install
 cd ..
-echo '/usr/local/lib' >> /etc/ld.so.conf
-ldconfig
 ```
 
 # install squid-4.0.4
