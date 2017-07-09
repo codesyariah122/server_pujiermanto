@@ -6,6 +6,7 @@ wget https://github.com/puji122/server/raw/master/all_about_squid_proxy/squid-4_
 tar xvf libecap-1.0.1.tar.gz
 cd libecap-*
 ./configure && make && make install
+cd ..
 ```
 # install ecap_adapter_sample
 ```bash
@@ -17,7 +18,7 @@ curl -o adapter_async.cc https://raw.githubusercontent.com/puji122/server/master
 curl -o adapter_modifying.cc https://raw.githubusercontent.com/puji122/server/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/adapter_modifying.cc
 cd -
 ./configure && make && make install
-cd
+cd ..
 echo '/usr/local/lib' >> /etc/ld.so.conf
 ldconfig
 ```
