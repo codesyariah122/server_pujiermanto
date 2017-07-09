@@ -13,3 +13,6 @@ youtube.com/api/stats/(ads|watchtime|qoe)?
 ad.doubleclick.net
 ^http.*internetpositif\.uzone\.id
 ^http.*kendedes\.uzone\.id
+\.*eltrack\.pro.*
+\.*unqpun\.pro.*
+\.*fftrack.pro.*
