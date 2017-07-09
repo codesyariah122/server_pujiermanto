@@ -1,0 +1,10 @@
+/ip firewall nat
+add action=dst-nat chain=dstnat comment=DNS_UNBOUND disabled=yes dst-port=53 in-interface=local protocol=udp src-address=192.168.1.0/24 src-address-list=\
+    LOCAL to-addresses=172.16.0.1 to-ports=53
+add action=passthrough chain=unused-hs-chain comment="place hotspot rules here" disabled=yes
+add action=masquerade chain=srcnat comment=SPEEDY out-interface=speedy
+add action=masquerade chain=srcnat disabled=yes out-interface=public
+add action=masquerade chain=srcnat disabled=yes out-interface=local
+add action=masquerade chain=srcnat disabled=yes out-interface=proxy
+add action=masquerade chain=srcnat disabled=yes out-interface=hotspot
+add action=masquerade chain=srcnat comment="masquerade hotspot network" disabled=yes src-address=192.168.200.0/24
