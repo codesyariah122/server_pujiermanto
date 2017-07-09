@@ -45,7 +45,22 @@ mkdir -p /etc/squid/ssl_cert
 openssl req -new -newkey rsa:2048 -sha256 -days 3652 -nodes -x509 -keyout /etc/squid/ssl_cert/proxy.pem -out /etc/squid/ssl_cert/proxy.pem -subj "/C=ID/ST=West Java/L=Bandung/O=TSI/CN=gnet.net.id"
 openssl x509 -in /etc/squid/ssl_cert/proxy.pem -outform DER -out /etc/squid/ssl_cert/proxy.der
 openssl x509 -in /etc/squid/ssl_cert/proxy.pem -outform DER -out /etc/squid/ssl_cert/proxy.crt
-
+cd -
+curl -o ad_block.txt https://raw.githubusercontent.com/puji122/server/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/ad_block.txt
+curl -o ip_bypas.txt https://raw.githubusercontent.com/puji122/server/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/ip_bypas.txt
+curl -o nossl.txt https://raw.githubusercontent.com/puji122/server/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/nossl.txt
+curl -o splice.txt https://raw.githubusercontent.com/puji122/server/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/splice.txt
+curl -o bypass_regex.txt https://raw.githubusercontent.com/puji122/server/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/bypass_regex.txt
+curl -o squid.conf https://raw.githubusercontent.com/puji122/server/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/squid.conf
+curl -o store-id.pl https://raw.githubusercontent.com/puji122/server/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/store-id.pl
+curl -o refresh.conf https://raw.githubusercontent.com/puji122/server/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/refresh.conf
+cd /etc/
+curl -o sysctl.conf https://raw.githubusercontent.com/puji122/server/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/sysctl.conf
+cd security/
+curl -o limits.conf https://raw.githubusercontent.com/puji122/server/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/limits.conf
+cd -
+curl -o modules https://raw.githubusercontent.com/puji122/server/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/modules
+curl -o rc.local https://raw.githubusercontent.com/puji122/server/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/rc.local
 cd
 chown -R proxy:proxy /var/log/squid/
 chmod -R 777 /var/log/squid/
