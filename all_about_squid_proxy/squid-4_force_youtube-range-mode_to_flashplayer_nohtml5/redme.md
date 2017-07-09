@@ -38,6 +38,13 @@ cd /var/log/squid/
 touch access.log
 touch cache.log
 
+# create certificates
+cd /etc/squid
+mkdir -p /etc/squid/ssl_cert
+openssl req -new -newkey rsa:2048 -sha256 -days 3652 -nodes -x509 -keyout /etc/squid/ssl_cert/proxy.pem -out /etc/squid/ssl_cert/proxy.pem -subj "/C=ID/ST=West Java/L=Bandung/O=TSI/CN=gnet.net.id"
+openssl x509 -in /etc/squid/ssl_cert/proxy.pem -outform DER -out /etc/squid/ssl_cert/proxy.der
+openssl x509 -in /etc/squid/ssl_cert/proxy.pem -outform DER -out /etc/squid/ssl_cert/proxy.crt
+
 cd
 chown -R proxy:proxy /var/log/squid/
 chmod -R 777 /var/log/squid/
