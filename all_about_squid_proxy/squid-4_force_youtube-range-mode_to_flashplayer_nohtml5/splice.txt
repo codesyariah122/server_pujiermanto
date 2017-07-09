@@ -1,0 +1,17 @@
+lolidcheck.garenanow.com
+lolid.gameinfo.garenanow.com
+lolstatic-a.akamaihd.net
+dl.garenanow.com
+cdngarenanow-a.akamaihd.net
+web.cdn.id.garenanow.com 
+web.cdn.garenanow.com
+idimupdate.garenanow.com
+idupdate.garenanow.com
+garenanow.com
+starhub.com
+cdn.id.garenanow.com
+cdn.garenanow.com
+gcms2.garena.com
+cdn.starhub.com
+
+

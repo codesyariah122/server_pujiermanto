@@ -1,10 +1,10 @@
-^http.{1,4}\w*google(\.\w|\w)*\.doubleclick\.net\/pagead\/ads\?.*		  
-^http.{1,4}\w*google(\.\w|\w)*\.doubleclick\.net\/pagead\/ads\?.*
-^http.{1,4}\w*\.doubleclick\.net\/\w*\/pfadx\/.*main.*;.*
+#^http.{1,4}\w*google(\.\w|\w)*\.doubleclick\.net\/pagead\/ads\?.*		  
+#^http.{1,4}\w*google(\.\w|\w)*\.doubleclick\.net\/pagead\/ads\?.*
+#^http.{1,4}\w*\.doubleclick\.net\/\w*\/pfadx\/.*main.*;.*
 youtube.com/api/stats/(ads|watchtime|qoe)?
 \.*chrome\w+.*updater.exe.*
 ^http:.*\.*(microsoft\.com)\/(download\/.*\.?)
-^http:\/\/.*\.*pack.google.com.*
+#^http:\/\/.*\.*pack.google.com.*
 ^http:\/\/.*channelbox\.iklanbaris\.detik\.com\/.*
 ^http:\/\/bs.serving-sys.com\/BurstingPipe\/adServer.bs.*
 ^http:\/\/.*newopenx.detik.com\/delivery\/.*

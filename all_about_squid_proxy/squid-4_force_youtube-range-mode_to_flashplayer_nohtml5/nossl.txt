@@ -1,0 +1,14 @@
+android\.clients\.google\.com
+get\.adobe\.com
+platformdl\.adobe\.com
+fpdownload\.adobe\.com
+duniaku\.net
+github\.com
+gcms2\.garena\.com
+cdn\.garenanow\.com
+cdn\.id\.garenanow\.com
+cdn\.garenanow.\com
+gcms2\.garena\.com
+cdn\.starhub\.com
+web\.cdn\.id\.garenanow\.com 
+web\.cdn\.garenanow\.com

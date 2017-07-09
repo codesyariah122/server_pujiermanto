@@ -1,0 +1,5 @@
+.*cdn.garenanow.com.*
+.*garenanow.com.*
+.*akamaized.net.*
+
+.*\.garenanow.com\/.*
