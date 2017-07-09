@@ -109,7 +109,7 @@ static const std::string CfgErrorPrefix =
 } // namespace Adapter
 
 std::string Adapter::Service::uri() const {
-	return "ecap://gnet.com/ecap";
+	return "ecap://dokter-squid.com/ecap";
 }
 
 std::string Adapter::Service::tag() const {
