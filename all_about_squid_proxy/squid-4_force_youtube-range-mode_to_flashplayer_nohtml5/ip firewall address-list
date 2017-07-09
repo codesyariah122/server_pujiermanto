@@ -1,0 +1,4 @@
+/ip firewall address-list
+add address=192.168.1.0/24 list=LOCAL
+add address=172.16.0.1 list=PROXY
+add address=192.168.200.0/24 list=hotspot
