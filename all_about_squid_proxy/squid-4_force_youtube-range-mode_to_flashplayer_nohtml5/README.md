@@ -18,7 +18,7 @@ cd ecap_adapter_sample-1.0.0/
 cd src/
 curl -o adapter_async.cc https://raw.githubusercontent.com/puji122/server/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/adapter_async.cc
 curl -o adapter_modifying.cc https://raw.githubusercontent.com/puji122/server/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/adapter_modifying.cc
-cd -
+cd ..
 ./configure && make && make install
 cd ..
 ```
