@@ -71,9 +71,6 @@ tar zxvf adapter.tar.gz && cd
 ldconfig
 chown -R proxy:proxy /etc/squid/
 chmod -R 777 /etc/squid/
-mkdir /var/lib/squid
-/usr/lib/squid/ssl_crtd -c -s /var/lib/squid/ssl_db
-chown -R nobody /var/lib/squid/ssl_db
 squid -k parse
 squid -k reconfigure
 reboot
