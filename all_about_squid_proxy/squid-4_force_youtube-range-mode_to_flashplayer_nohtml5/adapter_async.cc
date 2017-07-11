@@ -254,7 +254,7 @@ void Adapter::Xaction::analyze() {
 	static int count = 0;
 	const int delay = (++count % 4); // 0-3 seconds
 	std::clog << "adapter_async[" << this << "] starts " << delay << "s analysis" << std::endl;
-	//sleep(delay); // simulate slow analysis
+//      sleep(delay); // simulate slow analysis
 	std::clog << "adapter_async[" << this << "] ends   " << delay << "s analysis" << std::endl;
 	Service::Resume(self);
 	self.reset(); // XXX: may not happen if thread is canceled
