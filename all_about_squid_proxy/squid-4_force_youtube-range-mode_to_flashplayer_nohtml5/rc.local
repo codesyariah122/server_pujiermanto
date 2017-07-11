@@ -10,7 +10,8 @@
 # bits.
 #
 # By default this script does nothing.
-/usr/local/sbin/dnscrypt-proxy -a 127.0.0.1:40 -d -R d0wn-sg-ns1 -e 4096 -p /run/dnscrypt-proxy.pid
+# Dnsproxy 
+# /usr/local/sbin/dnscrypt-proxy -a 127.0.0.1:40 -d -R d0wn-sg-ns1 -e 4096 -p /run/dnscrypt-proxy.pid
 
 iptables -t mangle -N DIVERT
 iptables -t mangle -A DIVERT -j MARK --set-mark 1
