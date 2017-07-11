@@ -4,7 +4,7 @@
 ```bash
 wget https://github.com/puji122/server/raw/master/all_about_squid_proxy/squid-4_force_youtube-range-mode_to_flashplayer_nohtml5/libecap-1.0.1.tar.gz
 tar xvf libecap-1.0.1.tar.gz
-cd libecap-*
+cd libecap-1.0.1
 ./configure && make && make install
 echo '/usr/local/lib' >> /etc/ld.so.conf
 ldconfig
