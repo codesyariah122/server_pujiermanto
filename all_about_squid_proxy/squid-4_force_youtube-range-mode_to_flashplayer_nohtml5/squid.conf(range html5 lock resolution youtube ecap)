@@ -129,15 +129,15 @@ acl denyurl url_regex -i gvt1.com\/edgedl.*
 acl denyurl url_regex -i google\.com/edgedl.*
 acl denyurl url_regex -i ^http\:\/\/cache\.pack\.google\.com\/edgedl\/.*
 acl rangesteam url_regex -i ^http.*steam(powered|content).*\/(client|depot)\/.*\/(chunk|manifest)\/.*\?.*
-acl basejs url_regex -i ^http.*(youtube|ytimg)\.com\/.*\/player.*\/base\.js
+#acl basejs url_regex -i ^http.*(youtube|ytimg)\.com\/.*\/player.*\/base\.js
  
 acl CONNECT method CONNECT
 acl getmethod method GET
 
 http_access deny denyurl
 http_access deny rangesteam range206
-deny_info https://s.ytimg.com/yts/swfbin/player-vflx0pAVB/watch_as3.swf basejs
-http_access deny basejs
+#deny_info https://s.ytimg.com/yts/swfbin/player-vflx0pAVB/watch_as3.swf basejs
+#http_access deny basejs
 
 http_access allow localhost manager
 http_access deny manager
@@ -179,13 +179,15 @@ request_header_access Accept-Encoding deny youtube_240 yt-rewrite !uabrowser
 #yt_quality: tiny = 144px small = 240px medium = 360px large = 480px HD720 = Hd720px
 ecap_enable on
 loadable_modules /usr/local/lib/ecap_adapter_modifying.so
-ecap_service modif respmod_precache uri=ecap://gnet.com/ecap victim="enablejsapi","vq":"medium","enablejsapi"
+#ecap_service modif respmod_precache uri=ecap://gnet.com/ecap victim="enablejsapi","vq":"medium","enablejsapi"
 #ecap_service ecapModifier respmod_precache uri=ecap://gnet.com/ecap yt_quality=medium no-html5=no
 #ecap_service modif respmod_precache uri=ecap://e-cap.org/ecap/services/sample/modifying victim="html5":true replacement="html5":false
-#ecap_service modif respmod_precache uri=ecap://gnet.com/ecap victim="enablejsapi" replacement="dash":"0","vq":"medium","enablejsapi"
+ecap_service modif respmod_precache uri=ecap://m-amam_yuk.com/ecap/services/sample/modifying victim="enablejsapi" replacement="vq":"medium","enablejsapi"
 #adaptation_access ecapModifier allow youtube_240 yt-rewrite !uabrowser
 #adaptation_access ecapModifier deny all
-adaptation_access modif allow yt-rewrite youtube_240 !uabrowser
+adaptation_access modif allow yt-rewrite
+adaptation_access modif allow youtube_240
+adaptation_access modif allow !uabrowser
 adaptation_access modif deny all
 
 store_id_bypass off
