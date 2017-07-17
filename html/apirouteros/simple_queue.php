@@ -9,7 +9,7 @@ define('MIKROTIK_PASSWORD', '');
 define('SERVER', 'all');
 define('PROFILE', 'default');
 
-$API = new routeros_api();
+$API = new RouterosAPI();
 // Aktifkan debug
 // $API->debug = true;
 $nama = "Andi";
