@@ -6,7 +6,7 @@ if(isset($_REQUEST['edit'])){
 	$tgl=date('y/m/d H:i:s');
 	$nama=$_REQUEST['nama'];
 	$email=$_REQUEST['email'];
-	$alamat=$_REQUEST['alamat'];
+	$alamat=nl2br($_REQUEST['alamat']);
 	
 	$update_result=mysql_query("update data set tgl='$tgl', nama='$nama', email='$email', alamat='$alamat' 
 	where id='$_REQUEST[id]'");
