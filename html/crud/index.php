@@ -2,7 +2,7 @@
 <?// Puji Ermanto Create A simple crud PHP MYSQL ?>
 <?
 /*-------------------------------------------
-		Kontak
+		MyContact
 ---------------------------------------------
 Emali : pujiermanto@gmail.com,
 phone : 0895345041053	
