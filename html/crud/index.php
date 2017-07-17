@@ -1,4 +1,13 @@
 <?require 'method/form_input.php';?>
+<?// Puji Ermanto Create A simple crud PHP MYSQL ?>
+<?
+/*-------------------------------------------
+					Kontak
+---------------------------------------------
+Emali : pujiermanto@gmail.com,
+phone : 0895345041053	
+--------------------------------------------- */
+?>		
 <!DOCTYPE html>
 <html lang="em">
 <meta charset="utf-8">
