@@ -12,8 +12,8 @@ define('PROFILE', 'default');
 $API = new RouterosAPI();
 // Aktifkan debug
 // $API->debug = true;
-$nama = "Andi";
-$ip = "192.168.1.2";
+$nama = "gnet182";
+$ip = "192.168.1.1";
 $limit = "50000/500000";
 if ($API->connect(MIKROTIK_IP, MIKROTIK_USERNAME, MIKROTIK_PASSWORD))
 {
