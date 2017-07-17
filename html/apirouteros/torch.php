@@ -2,7 +2,7 @@
 require "routeros_api.class.php";
 define("MIKROTIK_IP","192.168.1.1");
 define("MIKROTIK_USERNAME","gnet182");
-define("MIKROTIK_PASSWORD","takadezo99");
+define("MIKROTIK_PASSWORD","123456");
 define("SERVER","all");
 define("PROFILE","default");
 
