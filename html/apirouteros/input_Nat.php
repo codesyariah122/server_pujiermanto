@@ -6,7 +6,7 @@ define('MIKROTIK_USERNAME', 'admin');
 define('MIKROTIK_PASSWORD', '12345');
 define('SERVER', 'all');
 define('PROFILE', 'default');
-$API = new routeros_api();
+$API = new RouterosAPI();
 // Aktifkan debug
 $API->debug = true;
 if ($API->connect(MIKROTIK_IP, MIKROTIK_USERNAME, MIKROTIK_PASSWORD))
