@@ -1,12 +1,13 @@
-<html>
-<head>
-<title>puji ermanto time</title>
-</head>
 <?/* contact 
   pujiermanto@gmail.com
   0895345041053
   */
 ?>
+<html>
+<head>
+<title>Test JS</title>
+</head>
+
 <body>
 <script language="javascript">
 function jamsekarang(){
