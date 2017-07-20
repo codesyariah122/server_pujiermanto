@@ -1,0 +1,401 @@
+# jul/20/2017 03:54:34 by RouterOS 6.38.7
+# software id = PVAE-BLDD
+#
+/interface ethernet
+set [ find default-name=ether3 ] name=hotspot
+set [ find default-name=ether2 ] name=local
+set [ find default-name=ether1 ] name=public
+/interface pppoe-client
+add add-default-route=yes disabled=no interface=public name=speedy password=740460834 use-peer-dns=yes user=131156120362@telkom.net
+/ip firewall layer7-protocol
+add name="YOUTUBE DOWNLOAD" regexp="http/(0\\.9|1\\.0|1\\.1) [\\x09-\\x0d ][1-5][0-9][0-9] [\\x09-\\x0d -~]*(content-type: video)"
+add name=EXE regexp="\\.(exe)"
+add name=RAR regexp="\\.(rar)"
+add name=ZIP regexp="\\.(zip)"
+add name=7z regexp="\\.(7z)"
+add name=WMV regexp="\\.(wmv)"
+add name=MPG regexp="\\.(mpg)"
+add name=MPEG regexp="\\.(mpeg)"
+add name=AVI regexp="\\.(avi)"
+add name=FLV regexp="\\.(flv)"
+add name=WAV regexp="\\.(wav)"
+add name=MP3 regexp="\\.(mp3)"
+add name=MP4 regexp="\\.(mp4)"
+add name=ISO regexp="\\.(iso)"
+add name=3GP regexp="\\.(3gp)"
+add name=MOV regexp="\\.(mov)"
+add name=MKV regexp="\\.(mkv)"
+add name="YOUTUBE STREAMING" regexp=youtube
+add name=PORN regexp=porn
+add name=TUBE regexp="\\.(tube)"
+add name=VIDEO regexp="\\.(video)"
+add name=MOVIE regexp=movie
+add name=IDM-Limit regexp="get /.*(user-agent: mozilla/4.0|range: bytes=)"
+add name=youtube regexp="(GET \\/videoplayback\\\?|GET \\/crossdomain\\.xml)"
+add name=youtube2 regexp="r[0-9]+---[a-z]+-+[a-z0-9-]+\\.googlevideo\\.com"
+/ip hotspot profile
+set [ find default=yes ] login-by=cookie,http-chap,http-pap,mac-cookie use-radius=yes
+add dns-name=gnet.com hotspot-address=192.168.200.1 login-by=cookie,http-chap,http-pap,mac-cookie name=hsprof1
+/ip hotspot user profile
+set [ find default=yes ] incoming-packet-mark=download name="2 mbps" outgoing-packet-mark=upload queue-type=default-small rate-limit=1m/2m
+add incoming-packet-mark=download name=trial outgoing-packet-mark=upload queue-type=default-small rate-limit=512k/1m
+add incoming-packet-mark=download name="1 mbps" outgoing-packet-mark=upload queue-type=default-small rate-limit=512k/1m
+add incoming-packet-mark=download name="tahi si epul" outgoing-packet-mark=upload queue-type=default-small rate-limit=512k/512k
+/ip ipsec proposal
+set [ find default=yes ] enc-algorithms=3des
+/ip pool
+add name=hs-pool-3 ranges=192.168.200.2-192.168.200.254
+/ip dhcp-server
+add address-pool=hs-pool-3 disabled=no interface=hotspot lease-time=1h name=dhcp1
+/ip hotspot
+add address-pool=hs-pool-3 disabled=no interface=hotspot name=hotspot1
+/queue simple
+add limit-at=3M/6M max-limit=4M/10M name="global local" target=local
+add limit-at=1M/2M max-limit=3M/5M name="client 0 server" parent="global local" target=192.168.1.2/32
+add limit-at=1M/2M max-limit=3M/5M name="client 1" parent="global local" target=192.168.1.3/32
+add limit-at=1M/2M max-limit=3M/5M name="client 2" parent="global local" target=192.168.1.4/32
+add limit-at=1M/2M max-limit=3M/5M name="client 3" parent="global local" target=192.168.1.5/32
+add limit-at=1M/2M max-limit=3M/5M name="client 4" parent="global local" target=192.168.1.6/32
+add limit-at=1M/2M max-limit=3M/5M name="client 5" parent="global local" target=192.168.1.7/32
+add limit-at=1M/2M max-limit=3M/5M name="client 6" parent="global local" target=192.168.1.8/32
+add limit-at=1M/2M max-limit=3M/5M name="client 7" parent="global local" target=192.168.1.9/32
+add limit-at=1M/2M max-limit=3M/5M name="client 8" parent="global local" target=192.168.1.10/32
+add limit-at=1M/2M max-limit=3M/5M name="client 9" parent="global local" target=192.168.1.11/32
+add limit-at=1M/2M max-limit=3M/5M name="client 10" parent="global local" target=192.168.1.12/32
+add limit-at=1M/2M max-limit=3M/5M name="client 11" parent="global local" target=192.168.1.13/32
+add limit-at=1M/2M max-limit=3M/5M name="client 12" parent="global local" target=192.168.1.14/32
+add limit-at=1M/2M max-limit=3M/5M name="client 14" parent="global local" target=192.168.1.16/32
+add limit-at=1M/2M max-limit=3M/5M name="client 13" parent="global local" target=192.168.1.15/32
+add limit-at=1M/2M max-limit=3M/5M name="client 15" parent="global local" target=192.168.1.17/32
+add limit-at=1M/2M max-limit=3M/5M name="client 16" parent="global local" target=192.168.1.18/32
+add limit-at=1M/2M max-limit=3M/5M name="client 17" parent="global local" target=192.168.1.19/32
+add limit-at=1M/2M max-limit=3M/5M name="client 22" parent="global local" target=192.168.1.24/32
+add limit-at=1M/2M max-limit=3M/5M name="client 23" parent="global local" target=192.168.1.25/32
+add limit-at=1M/2M max-limit=3M/5M name="client 21" parent="global local" target=192.168.1.23/32
+add limit-at=1M/2M max-limit=3M/5M name="client 20" parent="global local" target=192.168.1.22/32
+add limit-at=1M/2M max-limit=3M/5M name="client 19" parent="global local" target=192.168.1.21/32
+add limit-at=1M/2M max-limit=3M/5M name="client 18" parent="global local" target=192.168.1.20/32
+add name="hotspot kita" target=hotspot
+/queue tree
+add comment="game download" name="2.GAME DOWN" parent=global priority=2
+add comment="game upload" name="3.GAME UPLOAD" parent=speedy priority=2
+add comment="HTTP LOCAL" max-limit=30M name="1.2 HTTP-DOWN" parent=local priority=2
+add limit-at=6M max-limit=10M name="1.4 LIMIT EXTENTION" parent="1.2 HTTP-DOWN" priority=5
+add max-limit=4M name=YOUTUBE parent="1.4 LIMIT EXTENTION" priority=5
+add max-limit=5M name=PORN parent="1.4 LIMIT EXTENTION" priority=5
+add comment="ciberyndo download" max-limit=5M name="client down" parent="1.4 LIMIT EXTENTION"
+add name=VIDEO packet-mark=VIDEO parent="1.4 LIMIT EXTENTION" priority=5
+add name=TUBE packet-mark=TUBE parent="1.4 LIMIT EXTENTION" priority=5
+add comment="download steam update" max-limit=5M name="download steam" parent="1.4 LIMIT EXTENTION"
+/queue type
+add kind=pcq name=DOWN pcq-classifier=dst-address,dst-port
+add kind=pcq name=UP pcq-classifier=src-address,src-port
+/queue tree
+add name="1.GAME ONLINE DOWN" packet-mark=zar-gopd parent="2.GAME DOWN" priority=2 queue=DOWN
+add max-limit=5M name="2.GAME FACEBOOK DOWN" packet-mark=zar-gfpd parent="2.GAME DOWN" priority=3 queue=DOWN
+add name="1.GAME ONLINE UPLOAD" packet-mark=zar-gopd parent="3.GAME UPLOAD" priority=2 queue=UP
+add max-limit=3M name="2.GAME FACEBOOK UPLOAD" packet-mark=zar-gfpu parent="3.GAME UPLOAD" priority=3 queue=UP
+add comment="upload speedy" max-limit=3M name=UPLOAD-BROWSING packet-mark=upload parent=speedy priority=4 queue=UP
+add limit-at=6M max-limit=10M name="1.3 BROWSING DOWN" packet-mark=download parent="1.2 HTTP-DOWN" priority=4 queue=DOWN
+add name="YOUTUBE STREAMING" packet-mark="YOUTUBE STREAMING" parent=YOUTUBE priority=5 queue=DOWN
+add name=MKV packet-mark=MKV parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=MP3 packet-mark=MP3 parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=MP4 packet-mark=MP4 parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=ZIP packet-mark=ZIP parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=EXE packet-mark=EXE parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=ISO packet-mark=ISO parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=AVI packet-mark=AVI parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=MOV packet-mark=MOV parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=MPEG packet-mark=MPEG parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=MPG packet-mark=MPG parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=RAR packet-mark=RAR parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=WAV packet-mark=WAV parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=WMV packet-mark=WMV parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=3GP packet-mark=3GP parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=7z packet-mark=7z parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name="YOUTUBE DOWNLOAD" packet-mark="YOUTUBE DOWNLOAD" parent=YOUTUBE priority=5 queue=DOWN
+add name=PORN1 packet-mark=PORN1 parent=PORN priority=5 queue=DOWN
+add name=PORN2 packet-mark=PORN2 parent=PORN priority=5 queue=DOWN
+add name=PORN3 packet-mark=PORN3 parent=PORN priority=5 queue=DOWN
+add name="MIVO TV" packet-mark="MIVO TV" parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name=PORN4 packet-mark=PORN4 parent=PORN priority=5 queue=DOWN
+add disabled=yes name="proxy hit" packet-mark=proxy parent=global queue=default
+add max-limit=2M name=IDM-Limit packet-mark=IDM-Conn parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
+add name="video streamin" packet-mark="video streaming" parent=YOUTUBE queue=default
+add name="cyberindo down" packet-mark=CYBERINDO_DOWN parent="client down" queue=DOWN
+add name=youtube packet-mark=youtube parent=YOUTUBE queue=default
+add name=youtube2 packet-mark=youtube2 parent=YOUTUBE queue=default
+add comment="cyberindo upload" max-limit=3M name="upload cyberindo" parent=speedy queue=default
+add name="steam download" packet-mark="steam download" parent="download steam" queue=DOWN
+add disabled=yes name=proxy packet-mark=proxy parent="proxy hit"
+add name="c. level up" parent="upload cyberindo" queue=default
+add name="cyberindo up" packet-mark=CYBERINDO_UP parent="c. level up" queue=UP
+/routing ospf area
+add area-id=10.10.1.2 name=PB-Garena
+/system logging action
+set 0 memory-lines=100
+set 1 disk-lines-per-file=100
+/ipv6 settings
+set max-neighbor-entries=1024
+/ip address
+add address=192.168.100.1/24 interface=public network=192.168.100.0
+add address=192.168.1.1/24 interface=local network=192.168.1.0
+add address=192.168.200.1/24 interface=hotspot network=192.168.200.0
+add address=192.168.100.5/24 interface=public network=192.168.100.0
+/ip cloud
+set update-time=no
+/ip dhcp-server network
+add address=192.168.200.0/24 comment="hotspot network" gateway=192.168.200.1
+/ip dns
+set allow-remote-requests=yes servers=8.8.8.8,8.8.4.4
+/ip firewall filter
+add action=passthrough chain=unused-hs-chain comment="place hotspot rules here" disabled=yes
+add action=accept chain=input comment="Allow releated connections" connection-state=related
+add action=accept chain=input comment="Allow established connections" connection-state=established
+add action=accept chain=forward comment="Allow releated connections" connection-state=related
+add action=accept chain=forward comment="Allow established connections" connection-state=established
+add action=drop chain=forward comment="Drop invalid connections" connection-state=invalid
+add action=drop chain=virus comment="Blaster Worm" dst-port=135-139 protocol=tcp
+add action=drop chain=virus comment="Messenger Worm" dst-port=135-139 protocol=udp
+add action=drop chain=virus comment="Blaster Worm" dst-port=445 protocol=tcp
+add action=drop chain=virus comment="Blaster Worm" dst-port=445 protocol=udp
+add action=drop chain=virus comment=________ dst-port=593 protocol=tcp
+add action=drop chain=virus comment=________ dst-port=1024-1030 protocol=tcp
+add action=drop chain=virus comment="Drop MyDoom" dst-port=1080 protocol=tcp
+add action=drop chain=virus comment=________ dst-port=1214 protocol=tcp
+add action=drop chain=virus comment="ndm requester" dst-port=1363 protocol=tcp
+add action=drop chain=virus comment="ndm server" dst-port=1364 protocol=tcp
+add action=drop chain=virus comment="screen cast" dst-port=1368 protocol=tcp
+add action=drop chain=virus comment=hromgrafx dst-port=1373 protocol=tcp
+add action=drop chain=virus comment=cichlid dst-port=1377 protocol=tcp
+add action=drop chain=virus comment="Bagle Virus" dst-port=2745 protocol=tcp
+add action=drop chain=virus comment=Dumaru.Y dst-port=2283 protocol=tcp
+add action=drop chain=virus comment=Beagle dst-port=2535 protocol=tcp
+add action=drop chain=virus comment=Beagle.C-K dst-port=2745 protocol=tcp
+add action=drop chain=virus comment=MyDoom dst-port=3127-3128 protocol=tcp
+add action=drop chain=virus comment="Backdoor OptixPro" dst-port=3410 protocol=tcp
+add action=drop chain=virus comment=Worm dst-port=4444 protocol=tcp
+add action=drop chain=virus comment=Worm dst-port=4444 protocol=udp
+add action=drop chain=virus comment="Drop Sasser" dst-port=5554 protocol=tcp
+add action=drop chain=virus comment="Drop Beagle.B" dst-port=8866 protocol=tcp
+add action=drop chain=virus comment="Drop Dabber.A-B" dst-port=9898 protocol=tcp
+add action=drop chain=virus comment="Drop Dumaru.Y" dst-port=10000 protocol=tcp
+add action=drop chain=virus comment="Drop MyDoom.B" dst-port=10080 protocol=tcp
+add action=drop chain=virus comment="Drop NetBus" dst-port=12345 protocol=tcp
+add action=drop chain=virus comment="Drop Kuang2" dst-port=17300 protocol=tcp
+add action=drop chain=virus comment="Drop SubSeven" dst-port=27374 protocol=tcp
+add action=drop chain=virus comment="Drop PhatBot,Agobot, Gaobot" dst-port=65506 protocol=tcp
+add action=drop chain=virus comment=Trinoo dst-port=12667 protocol=udp
+add action=drop chain=virus comment=Trinoo dst-port=27665 protocol=udp
+add action=drop chain=virus comment=Trinoo dst-port=31335 protocol=udp
+add action=drop chain=virus comment=Trinoo dst-port=27444 protocol=udp
+add action=drop chain=virus comment=Trinoo dst-port=34555 protocol=udp
+add action=drop chain=virus comment=Trinoo dst-port=35555 protocol=udp
+add action=drop chain=virus comment=Trinoo dst-port=27444 protocol=tcp
+add action=drop chain=virus comment=Trinoo dst-port=27665 protocol=tcp
+add action=drop chain=virus comment=Trinoo dst-port=31335 protocol=tcp
+add action=drop chain=virus comment=Trinoo dst-port=31846 protocol=tcp
+add action=drop chain=virus comment=Trinoo dst-port=34555 protocol=tcp
+add action=drop chain=virus comment=Trinoo dst-port=35555 protocol=tcp
+add action=jump chain=forward comment="jump to the virus chain" jump-target=virus
+add action=accept chain=input comment="default configuration (anti netcut, defaultnya accept)" protocol=icmp
+add action=accept chain=input comment="ANTI NETCUT" dst-port=0-65535 protocol=tcp src-address=192.168.1.1-192.168.1.254
+add action=accept chain=input comment="ANTI NETCUT" dst-port=0-65535 protocol=tcp src-address=192.168.200.1-192.168.200.254
+add action=drop chain=forward comment=";;Block W32.Kido - Conficker" protocol=udp src-port=135-139,445
+add action=drop chain=forward dst-port=135-139,445 protocol=udp
+add action=drop chain=forward protocol=tcp src-port=135-139,445,593
+add action=drop chain=forward dst-port=135-139,445,593 protocol=tcp
+add action=accept chain=input comment="Allow limited pings" limit=50/5s,2:packet protocol=icmp
+add action=accept chain=input limit=50/5s,2:packet protocol=icmp
+add action=drop chain=input comment="drop FTP Brute Forcers" dst-port=21 protocol=tcp src-address-list=FTP_BlackList
+add action=drop chain=input dst-port=21 protocol=tcp src-address-list=FTP_BlackList
+add action=accept chain=output content="530 Login incorrect" dst-limit=1/1m,9,dst-address/1m protocol=tcp
+add action=add-dst-to-address-list address-list=FTP_BlackList address-list-timeout=1d chain=output content="530 Login incorrect" protocol=tcp
+add action=drop chain=input comment="drop SSH&TELNET Brute Forcers" dst-port=22-23 protocol=tcp src-address-list=IP_BlackList
+add action=add-src-to-address-list address-list=IP_BlackList address-list-timeout=1d chain=input connection-state=new dst-port=22-23 protocol=tcp \
+    src-address-list=SSH_BlackList_3
+add action=add-src-to-address-list address-list=SSH_BlackList_3 address-list-timeout=1m chain=input connection-state=new dst-port=22-23 protocol=tcp \
+    src-address-list=SSH_BlackList_2
+add action=add-src-to-address-list address-list=SSH_BlackList_2 address-list-timeout=1m chain=input connection-state=new dst-port=22-23 protocol=tcp \
+    src-address-list=SSH_BlackList_1
+add action=add-src-to-address-list address-list=SSH_BlackList_1 address-list-timeout=1m chain=input connection-state=new dst-port=22-23 protocol=tcp
+add action=drop chain=input comment="drop port scanners" src-address-list=port_scanners
+add action=add-src-to-address-list address-list=port_scanners address-list-timeout=2w chain=input protocol=tcp tcp-flags=fin,!syn,!rst,!psh,!ack,!urg
+add action=add-src-to-address-list address-list=port_scanners address-list-timeout=2w chain=input protocol=tcp tcp-flags=fin,syn
+add action=add-src-to-address-list address-list=port_scanners address-list-timeout=2w chain=input protocol=tcp tcp-flags=syn,rst
+add action=add-src-to-address-list address-list=port_scanners address-list-timeout=2w chain=input protocol=tcp tcp-flags=fin,psh,urg,!syn,!rst,!ack
+add action=add-src-to-address-list address-list=port_scanners address-list-timeout=2w chain=input protocol=tcp tcp-flags=fin,syn,rst,psh,ack,urg
+add action=add-src-to-address-list address-list=port_scanners address-list-timeout=2w chain=input protocol=tcp tcp-flags=!fin,!syn,!rst,!psh,!ack,!urg
+/ip firewall mangle
+add action=change-mss chain=forward new-mss=1440 out-interface=all-ppp passthrough=yes protocol=tcp tcp-flags=syn tcp-mss=1441-65535
+add action=change-mss chain=forward in-interface=all-ppp new-mss=1440 passthrough=yes protocol=tcp tcp-flags=syn tcp-mss=1441-65535
+add action=mark-packet chain=postrouting comment=MARK_CACHE_HIT_FROM_PROXY_ZAIB disabled=yes dscp=12 new-packet-mark=proxy passthrough=no
+add action=mark-connection chain=prerouting comment="closser online megaxus" dst-port=21232,41232 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting dst-port=32740 new-connection-mark=zar-goc passthrough=yes protocol=udp
+add action=mark-connection chain=prerouting comment=mobilelegend dst-port=30091,30101,14000,39571 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting comment=touch dst-port=8008 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting comment="Counter Strike Online " dst-port=36567,8001 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting dst-port=8001 new-connection-mark=zar-goc passthrough=yes protocol=udp
+add action=mark-connection chain=prerouting comment="Clash of God" dst-port=9430-9450,5220-5230 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting comment="World in Ayodance" dst-port=52510,53100-53110,54100,55100 new-connection-mark=zar-goc passthrough=yes \
+    protocol=tcp
+add action=mark-connection chain=prerouting comment="X-shot Indonesia" dst-port=7320-7350 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting dst-port=7800-7850,30000 new-connection-mark=zar-goc passthrough=yes protocol=udp
+add action=mark-connection chain=prerouting comment=rf dst-port=27780 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting comment="cabal rs" dst-port=38111-38121,38151 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting comment="cabal gsp" dst-port=63112,38111 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting comment="Lost Saga" dst-port=14000-14010 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting dst-port=14000-14010 new-connection-mark=zar-goc passthrough=yes protocol=udp
+add action=mark-connection chain=prerouting comment="Dragon Nest Indo" dst-port=14300-15512 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting dst-port=15000-15500 new-connection-mark=zar-goc passthrough=yes protocol=udp
+add action=mark-connection chain=prerouting comment="Cross Fire indonesia" dst-port=10009,13008,16666,28012 new-connection-mark=zar-goc passthrough=yes \
+    protocol=tcp
+add action=mark-connection chain=prerouting dst-port=12020-12080,13000-13080 new-connection-mark=zar-goc passthrough=yes protocol=udp
+add action=mark-connection chain=prerouting comment=lol dst-port=2099,5222,5223,8393-8400 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting dst-port=5000-5500 new-connection-mark=zar-goc passthrough=yes protocol=udp
+add action=mark-connection chain=prerouting comment="musuh abdi" dst-port=12310-12320 new-connection-mark=zar-goc passthrough=yes protocol=udp
+add action=mark-connection chain=prerouting comment=hon dst-port=9100-9200,11200-11500 new-connection-mark=zar-goc passthrough=yes protocol=udp
+add action=mark-connection chain=prerouting comment=ayodance dst-port=18901-18909 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting comment=atalantica dst-port=4300 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting comment="ayo oke" dst-port=28001-28010 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting dst-port=26001-26010 new-connection-mark=zar-goc passthrough=yes protocol=udp
+add action=mark-connection chain=prerouting comment="age of wushu" dst-port=2001,2002,2003 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting comment=dota2 dst-port=9100-9200,8230-8250,8110-8120 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting dst-port=28010-28200,27010-27200,39000 new-connection-mark=zar-goc passthrough=yes protocol=udp
+add action=mark-connection chain=prerouting comment="fifa online" dst-port=7777,7778,6316,6318,6320,6322,6324,6326,6328,6330,6332,6334,7779 \
+    new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting dst-port=6317,6319,6321,6323,6325,6327,6329,6331,6333,6325,16316 new-connection-mark=zar-goc passthrough=yes \
+    protocol=udp
+add action=mark-connection chain=prerouting dst-port=16318,16320,16322,16324,16326,16328,16330,16332,16334,16336 new-connection-mark=zar-goc passthrough=yes \
+    protocol=udp
+add action=mark-connection chain=prerouting comment=blacksquad dst-port=61000,62000 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting dst-port=50000-50100 new-connection-mark=zar-goc passthrough=yes protocol=udp
+add action=mark-connection chain=prerouting comment=pointblank dst-port=49100,39000-39500,11007 new-connection-mark=zar-goc passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting dst-port=40000-40010 new-connection-mark=zar-goc passthrough=yes protocol=udp
+add action=mark-packet chain=prerouting connection-mark=zar-goc new-packet-mark=zar-gopd passthrough=no
+add action=mark-connection chain=forward comment="GAME FACEBOOK" dst-port=843,9339,8890,7200-7210,7450-7460,8000,64990-65010,4000,26590-26600 \
+    new-connection-mark=zar-gfc passthrough=yes protocol=tcp
+add action=mark-packet chain=forward connection-mark=zar-gfc in-interface=speedy new-packet-mark=zar-gfpd passthrough=no
+add action=mark-packet chain=forward connection-mark=zar-gfc new-packet-mark=zar-gfpu out-interface=speedy passthrough=no
+add action=mark-packet chain=forward comment="LIMIT EXTENTION" layer7-protocol="YOUTUBE DOWNLOAD" new-packet-mark="YOUTUBE DOWNLOAD" passthrough=no
+add action=mark-packet chain=forward layer7-protocol="YOUTUBE STREAMING" new-packet-mark="YOUTUBE STREAMING" passthrough=no
+add action=mark-packet chain=forward layer7-protocol=TUBE new-packet-mark=PORN1 passthrough=no
+add action=mark-packet chain=forward layer7-protocol=PORN new-packet-mark=PORN2 passthrough=no
+add action=mark-packet chain=forward layer7-protocol=VIDEO new-packet-mark=PORN3 passthrough=no
+add action=mark-packet chain=forward layer7-protocol=MOVIE new-packet-mark=PORN4 passthrough=no
+add action=mark-packet chain=forward layer7-protocol=MKV new-packet-mark=MKV passthrough=no
+add action=mark-packet chain=forward layer7-protocol=MP3 new-packet-mark=MP3 passthrough=no
+add action=mark-packet chain=forward layer7-protocol=MP4 new-packet-mark=MP4 passthrough=no
+add action=mark-packet chain=forward layer7-protocol=ZIP new-packet-mark=ZIP passthrough=no
+add action=mark-packet chain=forward layer7-protocol=EXE new-packet-mark=EXE passthrough=no
+add action=mark-packet chain=forward layer7-protocol=FLV new-packet-mark=FLV passthrough=no
+add action=mark-packet chain=forward layer7-protocol=ISO new-packet-mark=ISO passthrough=no
+add action=mark-packet chain=forward layer7-protocol=MOV new-packet-mark=MOV passthrough=no
+add action=mark-packet chain=forward layer7-protocol=MPEG new-packet-mark=MPEG passthrough=no
+add action=mark-packet chain=forward layer7-protocol=MPG new-packet-mark=MPG passthrough=no
+add action=mark-packet chain=forward layer7-protocol=RAR new-packet-mark=RAR passthrough=no
+add action=mark-packet chain=forward layer7-protocol=WAV new-packet-mark=WAV passthrough=no
+add action=mark-packet chain=forward layer7-protocol=WMV new-packet-mark=WMV passthrough=no
+add action=mark-packet chain=forward layer7-protocol=VIDEO new-packet-mark=VIDEO passthrough=no
+add action=mark-packet chain=forward layer7-protocol=TUBE new-packet-mark=TUBE passthrough=no
+add action=mark-packet chain=forward layer7-protocol=7z new-packet-mark=7z passthrough=no
+add action=mark-packet chain=forward comment="video streaming" layer7-protocol=youtube new-packet-mark="video streaming" passthrough=no
+add action=mark-packet chain=forward comment=youtube layer7-protocol=youtube new-packet-mark=youtube passthrough=no
+add action=mark-packet chain=forward comment=youtube2 layer7-protocol=youtube2 new-packet-mark=youtube2 passthrough=no
+add action=mark-connection chain=prerouting comment="idm limit" layer7-protocol=IDM-Limit new-connection-mark=IDM-Conn passthrough=yes
+add action=mark-packet chain=prerouting connection-limit=2,32 connection-mark=IDM-Conn new-packet-mark=IDM-Conn passthrough=no
+add action=mark-connection chain=prerouting comment=HTTP dst-port=8080,80,53 new-connection-mark=browsing-con passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting comment=HTTP dst-port=443 new-connection-mark=browsing-con passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting comment=HTTP new-connection-mark=browsing-con passthrough=yes
+add action=mark-connection chain=prerouting comment=HTTP new-connection-mark=browsing-con passthrough=yes protocol=tcp
+add action=mark-connection chain=prerouting comment=HTTP new-connection-mark=browsing-con passthrough=yes protocol=udp
+add action=mark-connection chain=prerouting comment=HTTP new-connection-mark=browsing-con passthrough=yes protocol=icmp
+add action=mark-connection chain=prerouting comment=HTTP new-connection-mark=browsing-con passthrough=yes protocol=igmp
+add action=mark-connection chain=prerouting comment=pup new-connection-mark=browsing-con passthrough=yes src-address=118.98.109.0/24
+add action=mark-connection chain=prerouting dst-address=118.98.109.0/24 new-connection-mark=browsing-con passthrough=yes
+add action=mark-connection chain=prerouting comment="local ip" new-connection-mark=browsing-con passthrough=yes src-address=192.168.1.0/24
+add action=mark-connection chain=prerouting dst-address=192.168.1.0/24 new-connection-mark=browsing-con passthrough=yes
+add action=mark-connection chain=prerouting comment="hotspot ip" new-connection-mark=browsing-con passthrough=yes src-address=192.168.200.0/24
+add action=mark-connection chain=prerouting dst-address=192.168.200.0/24 new-connection-mark=browsing-con passthrough=yes
+add action=mark-packet chain=forward connection-mark=browsing-con in-interface=speedy new-packet-mark=download passthrough=no
+add action=mark-packet chain=forward connection-mark=browsing-con new-packet-mark=upload out-interface=speedy passthrough=no
+add action=mark-connection chain=prerouting comment="cyberindo up" dst-address=43.252.183.0/24 new-connection-mark=CYBERINDO_UP passthrough=yes
+add action=mark-connection chain=prerouting dst-address=43.252.184.0/24 new-connection-mark=CYBERINDO_UP passthrough=yes
+add action=mark-connection chain=prerouting dst-address=43.252.185.0/24 new-connection-mark=CYBERINDO_UP passthrough=yes
+add action=mark-connection chain=prerouting dst-address=43.252.186.0/24 new-connection-mark=CYBERINDO_UP passthrough=yes
+add action=mark-connection chain=prerouting dst-address=43.252.187.0/24 new-connection-mark=CYBERINDO_UP passthrough=yes
+add action=mark-connection chain=prerouting dst-address=103.12.30.0/24 new-connection-mark=CYBERINDO_UP passthrough=yes
+add action=mark-connection chain=prerouting dst-address=110.232.93.0/24 new-connection-mark=CYBERINDO_UP passthrough=yes
+add action=mark-connection chain=prerouting dst-address=103.11.133.0/24 new-connection-mark=CYBERINDO_UP passthrough=yes
+add action=mark-packet chain=forward connection-mark=CYBERINDO_UP new-packet-mark=CYBERINDO_UP passthrough=no
+add action=mark-connection chain=prerouting comment="cyberindo download" new-connection-mark=CYBERINDO_DOWN passthrough=yes src-address=43.252.183.0/24
+add action=mark-connection chain=prerouting new-connection-mark=CYBERINDO_DOWN passthrough=yes src-address=43.252.184.0/24
+add action=mark-connection chain=prerouting new-connection-mark=CYBERINDO_DOWN passthrough=yes src-address=43.252.185.0/24
+add action=mark-connection chain=prerouting new-connection-mark=CYBERINDO_DOWN passthrough=yes src-address=43.252.186.0/24
+add action=mark-connection chain=prerouting new-connection-mark=CYBERINDO_DOWN passthrough=yes src-address=43.252.187.0/24
+add action=mark-connection chain=prerouting new-connection-mark=CYBERINDO_DOWN passthrough=yes src-address=103.12.30.0/24
+add action=mark-connection chain=prerouting new-connection-mark=CYBERINDO_DOWN passthrough=yes src-address=110.232.93.0/24
+add action=mark-connection chain=prerouting new-connection-mark=CYBERINDO_DOWN passthrough=yes src-address=103.11.133.0/24
+add action=mark-packet chain=forward connection-mark=CYBERINDO_DOWN new-packet-mark=CYBERINDO_DOWN passthrough=no
+add action=mark-connection chain=prerouting comment="steam update" new-connection-mark="steam down" passthrough=yes protocol=tcp src-address=103.10.124.0/24
+add action=mark-connection chain=prerouting new-connection-mark="steam down" passthrough=yes protocol=tcp src-address=103.28.54.0/24
+add action=mark-packet chain=prerouting connection-mark="steam down" new-packet-mark="steam download" passthrough=no
+add action=jump chain=prerouting jump-target=hotspot
+add action=jump chain=postrouting jump-target=hotspot
+/ip firewall nat
+add action=passthrough chain=unused-hs-chain comment="place hotspot rules here" disabled=yes
+add action=masquerade chain=srcnat comment=speedy
+add action=dst-nat chain=dstnat comment=DNS_UNBOUND disabled=yes dst-port=53 in-interface=local protocol=udp src-address=192.168.1.0/24 src-address-list=\
+    LOCAL to-addresses=172.16.0.1 to-ports=53
+add action=masquerade chain=srcnat comment="masquerade hotspot network" disabled=yes src-address=192.168.200.0/24
+/ip hotspot user
+add name=admin password=takadezo99
+add name=trial password=takadezo99 profile=trial
+add comment="tanggal 4" name=nanda192 password=nanda271210 profile="1 mbps"
+add comment="tanggal 4" name=iyang192 password=iyang271210 profile="1 mbps"
+add comment="tanggal 15" name=aderisma192 password=aderisma123456
+add name=gea192 password=takadezo99 profile="1 mbps"
+add comment="/ 12 bayar na" name=hariss1004 password=hs499101
+add comment="keluarga si neng" disabled=yes name=gilang1 password=2712101
+add name=padasep2 password=2712102 profile="1 mbps"
+add disabled=yes name=tehelis3 password=2712103
+add comment="tgl 4 bayar na" name=febi password=241193 profile="1 mbps"
+add name=padasep10 password=27121010
+add name=padadin192 password=271210192
+add comment="tgl1 bayarnya" name=saepul password=saepul192
+add name=risyad192 password=271210192 profile="1 mbps"
+add comment="============================================Voucher Hotspot==========================================================" limit-uptime=12h name=\
+    rainy password=rainy123 profile="1 mbps"
+add limit-uptime=12h name=akbar password=gnet2017 profile="1 mbps"
+add name=uji password=uji123ganteng2017 profile="1 mbps"
+add limit-uptime=6h name=Rulz password=gnet2017 profile="1 mbps"
+add name=gia192 password=takadezo99 profile="1 mbps"
+add comment="Epul = Tgl 6 Juni 2017" name=argan password=fhakim1412 profile="1 mbps"
+add limit-uptime=6h name=dodi password=gnet2017 profile="1 mbps"
+add comment=PAIWAN name=paiwan182 password=paiwan271210 profile="1 mbps"
+/ip proxy
+set cache-path=web-proxy1
+/ip proxy access
+add action=deny disabled=yes src-address=0.0.0.0/0
+add action=deny disabled=yes src-address=0.0.0.0/0
+/ip service
+set telnet disabled=yes
+set ftp disabled=yes
+set ssh disabled=yes
+set www-ssl disabled=no
+/radius
+add address=127.0.0.1 disabled=yes secret=123456 service=hotspot
+add address=127.0.0.1 disabled=yes secret=123456 service=hotspot
+/radius incoming
+set accept=yes port=1700
+/routing ospf network
+add area=PB-Garena disabled=yes network=172.20.254.1/32
+/system clock
+set time-zone-name=Asia/Jakarta
+/system package update
+set channel=bugfix
+/system resource irq rps
+set public disabled=no
+set local disabled=no
+set hotspot disabled=no
+set ether5 disabled=no
