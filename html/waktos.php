@@ -7,19 +7,27 @@
 <head>
 <title>Test JS</title>
 </head>
-
+<h1 id="waktos"></h1>
 <body>
-<script language="javascript">
-function waktos(){
-var waktu=new Date();
-var judul = "Ayena Tabuh :";
-var jam   = waktu.getHours();
-var menit = waktu.getMinutes();
-var detik = waktu.getSeconds();
+						<script type="text/javascript">
+						window.onload = function() { waktos(); }
 
-document.body.innerHTML = judul+"&nbsp;"+jam+":"+menit+":"+detik;
-}
-setInterval(waktos, 1000);
-</script>
+							function waktos() {
+								var e = document.getElementById('waktos'),
+									d = new Date(), h, m, s;
+									h = d.getHours();
+									m = set(d.getMinutes());
+									s = set(d.getSeconds());
+
+									e.innerHTML = h +':'+ m +':'+ s;
+
+								setTimeout('waktos()', 1000);
+							}
+
+								function set(e) {
+								e = e < 10 ? '0'+ e : e;
+										return e;
+									}
+						</script>
 </body>
 </html>
