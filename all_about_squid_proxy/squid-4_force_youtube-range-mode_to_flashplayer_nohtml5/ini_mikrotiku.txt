@@ -1,6 +1,8 @@
-# jul/20/2017 03:54:34 by RouterOS 6.38.7
+# jul/22/2017 05:33:37 by RouterOS 6.38.7
 # software id = PVAE-BLDD
 #
+/interface bridge
+add name=bridge1
 /interface ethernet
 set [ find default-name=ether3 ] name=hotspot
 set [ find default-name=ether2 ] name=local
@@ -35,22 +37,17 @@ add name=youtube regexp="(GET \\/videoplayback\\\?|GET \\/crossdomain\\.xml)"
 add name=youtube2 regexp="r[0-9]+---[a-z]+-+[a-z0-9-]+\\.googlevideo\\.com"
 /ip hotspot profile
 set [ find default=yes ] login-by=cookie,http-chap,http-pap,mac-cookie use-radius=yes
-add dns-name=gnet.com hotspot-address=192.168.200.1 login-by=cookie,http-chap,http-pap,mac-cookie name=hsprof1
 /ip hotspot user profile
-set [ find default=yes ] incoming-packet-mark=download name="2 mbps" outgoing-packet-mark=upload queue-type=default-small rate-limit=1m/2m
-add incoming-packet-mark=download name=trial outgoing-packet-mark=upload queue-type=default-small rate-limit=512k/1m
-add incoming-packet-mark=download name="1 mbps" outgoing-packet-mark=upload queue-type=default-small rate-limit=512k/1m
-add incoming-packet-mark=download name="tahi si epul" outgoing-packet-mark=upload queue-type=default-small rate-limit=512k/512k
+set [ find default=yes ] incoming-packet-mark=download outgoing-packet-mark=upload queue-type=default-small
 /ip ipsec proposal
 set [ find default=yes ] enc-algorithms=3des
 /ip pool
 add name=hs-pool-3 ranges=192.168.200.2-192.168.200.254
 /ip dhcp-server
+# DHCP server can not run on slave interface!
 add address-pool=hs-pool-3 disabled=no interface=hotspot lease-time=1h name=dhcp1
-/ip hotspot
-add address-pool=hs-pool-3 disabled=no interface=hotspot name=hotspot1
 /queue simple
-add limit-at=3M/6M max-limit=4M/10M name="global local" target=local
+add limit-at=3M/6M max-limit=4M/10M name="global local" priority=4/4 target=local,local
 add limit-at=1M/2M max-limit=3M/5M name="client 0 server" parent="global local" target=192.168.1.2/32
 add limit-at=1M/2M max-limit=3M/5M name="client 1" parent="global local" target=192.168.1.3/32
 add limit-at=1M/2M max-limit=3M/5M name="client 2" parent="global local" target=192.168.1.4/32
@@ -75,12 +72,11 @@ add limit-at=1M/2M max-limit=3M/5M name="client 21" parent="global local" target
 add limit-at=1M/2M max-limit=3M/5M name="client 20" parent="global local" target=192.168.1.22/32
 add limit-at=1M/2M max-limit=3M/5M name="client 19" parent="global local" target=192.168.1.21/32
 add limit-at=1M/2M max-limit=3M/5M name="client 18" parent="global local" target=192.168.1.20/32
-add name="hotspot kita" target=hotspot
 /queue tree
 add comment="game download" name="2.GAME DOWN" parent=global priority=2
 add comment="game upload" name="3.GAME UPLOAD" parent=speedy priority=2
-add comment="HTTP LOCAL" max-limit=30M name="1.2 HTTP-DOWN" parent=local priority=2
-add limit-at=6M max-limit=10M name="1.4 LIMIT EXTENTION" parent="1.2 HTTP-DOWN" priority=5
+add comment="HTTP LOCAL" max-limit=10M name="1.2 HTTP-DOWN" parent=local priority=2
+add limit-at=4M max-limit=6M name="1.4 LIMIT EXTENTION" parent="1.2 HTTP-DOWN" priority=5
 add max-limit=4M name=YOUTUBE parent="1.4 LIMIT EXTENTION" priority=5
 add max-limit=5M name=PORN parent="1.4 LIMIT EXTENTION" priority=5
 add comment="ciberyndo download" max-limit=5M name="client down" parent="1.4 LIMIT EXTENTION"
@@ -96,7 +92,7 @@ add max-limit=5M name="2.GAME FACEBOOK DOWN" packet-mark=zar-gfpd parent="2.GAME
 add name="1.GAME ONLINE UPLOAD" packet-mark=zar-gopd parent="3.GAME UPLOAD" priority=2 queue=UP
 add max-limit=3M name="2.GAME FACEBOOK UPLOAD" packet-mark=zar-gfpu parent="3.GAME UPLOAD" priority=3 queue=UP
 add comment="upload speedy" max-limit=3M name=UPLOAD-BROWSING packet-mark=upload parent=speedy priority=4 queue=UP
-add limit-at=6M max-limit=10M name="1.3 BROWSING DOWN" packet-mark=download parent="1.2 HTTP-DOWN" priority=4 queue=DOWN
+add limit-at=4M max-limit=6M name="1.3 BROWSING DOWN" packet-mark=download parent="1.2 HTTP-DOWN" priority=4 queue=DOWN
 add name="YOUTUBE STREAMING" packet-mark="YOUTUBE STREAMING" parent=YOUTUBE priority=5 queue=DOWN
 add name=MKV packet-mark=MKV parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
 add name=MP3 packet-mark=MP3 parent="1.4 LIMIT EXTENTION" priority=5 queue=DOWN
@@ -135,13 +131,16 @@ add area-id=10.10.1.2 name=PB-Garena
 /system logging action
 set 0 memory-lines=100
 set 1 disk-lines-per-file=100
+/interface bridge port
+add bridge=bridge1 interface=hotspot
+/interface bridge settings
+set use-ip-firewall-for-pppoe=yes use-ip-firewall-for-vlan=yes
 /ipv6 settings
 set max-neighbor-entries=1024
 /ip address
 add address=192.168.100.1/24 interface=public network=192.168.100.0
 add address=192.168.1.1/24 interface=local network=192.168.1.0
-add address=192.168.200.1/24 interface=hotspot network=192.168.200.0
-add address=192.168.100.5/24 interface=public network=192.168.100.0
+add address=192.168.0.1/24 interface=hotspot network=192.168.0.0
 /ip cloud
 set update-time=no
 /ip dhcp-server network
@@ -149,7 +148,6 @@ add address=192.168.200.0/24 comment="hotspot network" gateway=192.168.200.1
 /ip dns
 set allow-remote-requests=yes servers=8.8.8.8,8.8.4.4
 /ip firewall filter
-add action=passthrough chain=unused-hs-chain comment="place hotspot rules here" disabled=yes
 add action=accept chain=input comment="Allow releated connections" connection-state=related
 add action=accept chain=input comment="Allow established connections" connection-state=established
 add action=accept chain=forward comment="Allow releated connections" connection-state=related
@@ -315,7 +313,7 @@ add action=mark-connection chain=prerouting comment=pup new-connection-mark=brow
 add action=mark-connection chain=prerouting dst-address=118.98.109.0/24 new-connection-mark=browsing-con passthrough=yes
 add action=mark-connection chain=prerouting comment="local ip" new-connection-mark=browsing-con passthrough=yes src-address=192.168.1.0/24
 add action=mark-connection chain=prerouting dst-address=192.168.1.0/24 new-connection-mark=browsing-con passthrough=yes
-add action=mark-connection chain=prerouting comment="hotspot ip" new-connection-mark=browsing-con passthrough=yes src-address=192.168.200.0/24
+add action=mark-connection chain=prerouting comment="local ip" new-connection-mark=browsing-con passthrough=yes src-address=192.168.200.0/24
 add action=mark-connection chain=prerouting dst-address=192.168.200.0/24 new-connection-mark=browsing-con passthrough=yes
 add action=mark-packet chain=forward connection-mark=browsing-con in-interface=speedy new-packet-mark=download passthrough=no
 add action=mark-packet chain=forward connection-mark=browsing-con new-packet-mark=upload out-interface=speedy passthrough=no
@@ -340,39 +338,37 @@ add action=mark-packet chain=forward connection-mark=CYBERINDO_DOWN new-packet-m
 add action=mark-connection chain=prerouting comment="steam update" new-connection-mark="steam down" passthrough=yes protocol=tcp src-address=103.10.124.0/24
 add action=mark-connection chain=prerouting new-connection-mark="steam down" passthrough=yes protocol=tcp src-address=103.28.54.0/24
 add action=mark-packet chain=prerouting connection-mark="steam down" new-packet-mark="steam download" passthrough=no
-add action=jump chain=prerouting jump-target=hotspot
-add action=jump chain=postrouting jump-target=hotspot
 /ip firewall nat
-add action=passthrough chain=unused-hs-chain comment="place hotspot rules here" disabled=yes
-add action=masquerade chain=srcnat comment=speedy
 add action=dst-nat chain=dstnat comment=DNS_UNBOUND disabled=yes dst-port=53 in-interface=local protocol=udp src-address=192.168.1.0/24 src-address-list=\
     LOCAL to-addresses=172.16.0.1 to-ports=53
-add action=masquerade chain=srcnat comment="masquerade hotspot network" disabled=yes src-address=192.168.200.0/24
+add action=masquerade chain=srcnat comment=speedy out-interface=speedy
 /ip hotspot user
 add name=admin password=takadezo99
-add name=trial password=takadezo99 profile=trial
-add comment="tanggal 4" name=nanda192 password=nanda271210 profile="1 mbps"
-add comment="tanggal 4" name=iyang192 password=iyang271210 profile="1 mbps"
+add name=trial password=takadezo99
+add comment="tanggal 4" name=nanda192 password=nanda271210
+add comment="tanggal 4" name=iyang192 password=iyang271210
 add comment="tanggal 15" name=aderisma192 password=aderisma123456
-add name=gea192 password=takadezo99 profile="1 mbps"
+add name=gea192 password=takadezo99
 add comment="/ 12 bayar na" name=hariss1004 password=hs499101
-add comment="keluarga si neng" disabled=yes name=gilang1 password=2712101
-add name=padasep2 password=2712102 profile="1 mbps"
-add disabled=yes name=tehelis3 password=2712103
-add comment="tgl 4 bayar na" name=febi password=241193 profile="1 mbps"
+add comment="keluarga si neng" name=gilang1 password=2712101
+add name=padasep2 password=2712102
+add name=tehelis3 password=2712103
+add comment="tgl 4 bayar na" name=febi password=241193
 add name=padasep10 password=27121010
 add name=padadin192 password=271210192
 add comment="tgl1 bayarnya" name=saepul password=saepul192
-add name=risyad192 password=271210192 profile="1 mbps"
+add name=risyad192 password=271210192
 add comment="============================================Voucher Hotspot==========================================================" limit-uptime=12h name=\
-    rainy password=rainy123 profile="1 mbps"
-add limit-uptime=12h name=akbar password=gnet2017 profile="1 mbps"
-add name=uji password=uji123ganteng2017 profile="1 mbps"
-add limit-uptime=6h name=Rulz password=gnet2017 profile="1 mbps"
-add name=gia192 password=takadezo99 profile="1 mbps"
-add comment="Epul = Tgl 6 Juni 2017" name=argan password=fhakim1412 profile="1 mbps"
-add limit-uptime=6h name=dodi password=gnet2017 profile="1 mbps"
-add comment=PAIWAN name=paiwan182 password=paiwan271210 profile="1 mbps"
+    rainy password=rainy123
+add limit-uptime=12h name=akbar password=gnet2017
+add name=uji password=uji123ganteng2017
+add limit-uptime=6h name=Rulz password=gnet2017
+add name=gia192 password=takadezo99
+add comment="Epul = Tgl 6 Juni 2017" name=argan password=fhakim1412
+add limit-uptime=6h name=dodi password=gnet2017
+add comment=PAIWAN name=paiwan182 password=paiwan271210
+add limit-uptime=6h name=akmal password=gnet2017
+add limit-uptime=6h name=kicus password=gnet
 /ip proxy
 set cache-path=web-proxy1
 /ip proxy access
@@ -383,9 +379,6 @@ set telnet disabled=yes
 set ftp disabled=yes
 set ssh disabled=yes
 set www-ssl disabled=no
-/radius
-add address=127.0.0.1 disabled=yes secret=123456 service=hotspot
-add address=127.0.0.1 disabled=yes secret=123456 service=hotspot
 /radius incoming
 set accept=yes port=1700
 /routing ospf network
