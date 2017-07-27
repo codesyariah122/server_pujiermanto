@@ -7,8 +7,7 @@
 Emali : pujiermanto@gmail.com,
 phone : 0895345041053	
 --------------------------------------------- */
-?>		
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="em">
 <meta charset="utf-8">
 <head><title>DATA CRUD</title></head>
