@@ -63,9 +63,20 @@ $equal_data=array($no,$tgl,$nama,$email,$telp,$alamat);
 <?for($_X=0;$_X<count($equal_data);$_X++){?>
 <td><?=$equal_data[$_X];?></td>
 <?}?>
-<td><a href="method/hapus.php?id=<?=$result_array['id'];?>"><button type="button" onclick='return.confirm("semua data di database akan terhapus")'>Hapus</button></a>&nbsp;
+<td><a href="method/hapus.php?id=<?=$result_array['id'];?>"><button type="button" onclick='return konfirmasi()'>Hapus</button></a>&nbsp;
 <a href="method/edit.php?id=<?=$result_array['id'];?>"><button type="button">edit</button></a></td>
 </tr>
 <?$no++;}?>
 <?table("tutup");?>
 </fieldset>
+	<script type="text/javascript" language="javascript">
+		function konfirmasi(){
+			tanya = confirm("Anda Yakin Mau Menghapus data anda ?");
+		if(tanya == true)
+			return true;
+			else
+				return false;
+		};
+	</script>
+	</body>
+</html>
