@@ -2,7 +2,7 @@
 <?// Puji Ermanto Create A simple crud PHP MYSQL ?>
 <?
 /*-------------------------------------------
-		MyContact
+					Kontak
 ---------------------------------------------
 Emali : pujiermanto@gmail.com,
 phone : 0895345041053	
@@ -10,7 +10,9 @@ phone : 0895345041053
 ?><!DOCTYPE html>
 <html lang="em">
 <meta charset="utf-8">
-<head><title>DATA CRUD</title></head>
+<head><title>DATA CRUD</title>
+<link rel="stylesheet" type="text/css" media="print" href="asset/mystyle.css">
+</head>
 <body>
 <fieldset><legend><h2> WELCOME CRUD DATA </h2></legend>
 <?form_buka("method/proses.php","post");?>
@@ -39,7 +41,7 @@ phone : 0895345041053
 <?table("buka",1);?>
 <tr>
 <?
-$th=array("No","Tanggal input_index","Nama","Email","Telp","Alamat","Opsi");
+$th=array("No","Tanggal input","Nama","Email","Telp","Alamat","Opsi");
 for($X=0;$X<count($th);$X++){
 	echo "<th>".$th[$X]."</th>"; 
 }
@@ -56,7 +58,7 @@ $tgl=$result_array['tgl'];
 $nama=$result_array['nama'];
 $email=$result_array['email'];
 $telp=md5($result_array['telp']);
-$alamat=$result_array['alamat'];
+$alamat=strip_tags($result_array['alamat']);
 $equal_data=array($no,$tgl,$nama,$email,$telp,$alamat);
 ?>
 <tr>
@@ -69,14 +71,15 @@ $equal_data=array($no,$tgl,$nama,$email,$telp,$alamat);
 <?$no++;}?>
 <?table("tutup");?>
 </fieldset>
-	<script type="text/javascript" language="javascript">
+
+<script type="text/javascript" language="javascript">
 		function konfirmasi(){
 			tanya = confirm("Anda Yakin Mau Menghapus data anda ?");
 		if(tanya == true)
 			return true;
-		else
-			return false;
+			else
+				return false;
 		};
 	</script>
-	</body>
+</body>
 </html>
